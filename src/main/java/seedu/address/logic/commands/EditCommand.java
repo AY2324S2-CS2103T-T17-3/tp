@@ -11,12 +11,14 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
@@ -84,7 +86,7 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
     /**
@@ -98,15 +100,14 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedRemark);
     }
 
     @Override
     public boolean equals(Object other) {
-        // short circuit if same object
         if (other == this) {
             return true;
         }
@@ -116,10 +117,17 @@ public class EditCommand extends Command {
             return false;
         }
 
-        // state check
-        EditCommand e = (EditCommand) other;
-        return index.equals(e.index)
-            && editPersonDescriptor.equals(e.editPersonDescriptor);
+        EditCommand otherEditCommand = (EditCommand) other;
+        return index.equals(otherEditCommand.index)
+            && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+            .add("index", index)
+            .add("editPersonDescriptor", editPersonDescriptor)
+            .toString();
     }
 
     /**
@@ -132,6 +140,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Remark remark;
 
         public EditPersonDescriptor() {}
 
@@ -145,13 +154,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setRemark(toCopy.remark);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, remark);
         }
 
         public void setName(Name name) {
@@ -203,9 +213,16 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        private void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
+        }
+
         @Override
         public boolean equals(Object other) {
-            // short circuit if same object
             if (other == this) {
                 return true;
             }
@@ -215,14 +232,23 @@ public class EditCommand extends Command {
                 return false;
             }
 
-            // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
+            return Objects.equals(name, otherEditPersonDescriptor.name)
+                && Objects.equals(phone, otherEditPersonDescriptor.phone)
+                && Objects.equals(email, otherEditPersonDescriptor.email)
+                && Objects.equals(address, otherEditPersonDescriptor.address)
+                && Objects.equals(tags, otherEditPersonDescriptor.tags);
+        }
 
-            return getName().equals(e.getName())
-                && getPhone().equals(e.getPhone())
-                && getEmail().equals(e.getEmail())
-                && getAddress().equals(e.getAddress())
-                && getTags().equals(e.getTags());
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("address", address)
+                .add("tags", tags)
+                .toString();
         }
     }
 }
