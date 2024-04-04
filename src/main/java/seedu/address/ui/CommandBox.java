@@ -48,6 +48,10 @@ public class CommandBox extends UiPart<Region> {
             if (!result.getFeedbackToUser().contains(NoteCommandMessages.MESSAGE_EDIT_FEEDBACK_TO_USER)) {
                 this.commandTextField.setText("");
             }
+
+            if (result.isFromFitAddCommand() || result.isFromFitDeleteCommand()) {
+                MainWindow.getInstance().switchToExerciseTab();
+            }
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }

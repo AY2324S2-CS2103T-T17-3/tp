@@ -280,4 +280,8 @@ public class MainWindow extends UiPart<Stage> {
     public PersonDetailsPanel getPersonDetailsPanel() {
         return this.personDetailsPanel;
     }
+
+    public void switchToExerciseTab() {
+        this.personDetailsPanel.selectExerciseTab();
+    }
 }
