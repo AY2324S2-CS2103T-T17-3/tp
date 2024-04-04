@@ -296,4 +296,12 @@ public class Person {
         TAGS,
         EXERCISES
     }
+
+    /**
+     * Check if there is a weight entry available.
+     */
+    public boolean hasWeight() {
+        Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = this.getLatestWeight();
+        return latestWeight.isPresent();
+    }
 }

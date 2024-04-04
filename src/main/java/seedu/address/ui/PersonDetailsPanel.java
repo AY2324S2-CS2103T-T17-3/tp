@@ -168,14 +168,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         // Clear tabs
         this.trackableFieldsTabPane.getTabs().clear();
 
-        // Display weights graph
-        if (latestWeight.isPresent()) {
-            this.trackableFieldsTabPane.getTabs().add(0, this.weightTab);
-            XYChart.Series<String, Number> weightSeries = this.generateWeightSeries(person);
-
-            this.weightChart.getData().clear();
-            this.weightChart.getData().add(weightSeries);
-        }
+        this.addWeightTab();
 
         // Display exercises
         Label exercisesTitle = new Label("Exercises");
@@ -379,5 +372,15 @@ public class PersonDetailsPanel extends UiPart<Region> {
         this.height.setText(this.person.getHeight().getFormattedHeight());
         this.note.setText(this.person.getNote().toString());
         this.qrcode.setImage(new Image(this.person.getQrCodePath().toUri().toString()));
+    }
+
+    private void addWeightTab() {
+        if (this.person.hasWeight()) {
+            this.trackableFieldsTabPane.getTabs().add(0, this.weightTab);
+            XYChart.Series<String, Number> weightSeries = this.generateWeightSeries(person);
+
+            this.weightChart.getData().clear();
+            this.weightChart.getData().add(weightSeries);
+        }
     }
 }
