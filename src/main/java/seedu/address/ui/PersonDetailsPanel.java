@@ -81,6 +81,10 @@ public class PersonDetailsPanel extends UiPart<Region> {
     private LineChart<String, Number> weightChart;
     private NumberAxis weightYAxis;
     private VBox exercisesBox;
+    /**
+     * Person whose details are being shown in the details pane.
+     */
+    private Person person;
 
     /**
      * Creates a new PersonDetailsPanel and clears all fields.
@@ -156,6 +160,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
      * @param person the Person object containing the information to update the fields with.
      */
     public void update(Person person) {
+        this.person = person;
         this.detailsPane.setVisible(true);
 
         // Set fields with information from the person
