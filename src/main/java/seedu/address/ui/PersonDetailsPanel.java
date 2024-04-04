@@ -171,15 +171,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
         this.updateTags();
 
+        this.updateLatestWeight();
 
-        Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = person.getLatestWeight();
-        if (latestWeight.isPresent()) {
-            LocalDate numericDate = latestWeight.get().getKey().toLocalDate();
-            String formattedDate = numericDate.format(DateTimeUtil.DATE_FORMATTER);
-            this.weightDate.setText(WeightCommandMessages.WEIGHT_DATE_HEADER + formattedDate);
-            this.weightValue.setText(WeightCommandMessages.WEIGHT_VALUE_HEADER
-                + latestWeight.get().getValue().toString() + " kg");
-        }
 
         this.height.setText(person.getHeight().getFormattedHeight());
         this.note.setText(person.getNote().toString());
@@ -212,13 +205,14 @@ public class PersonDetailsPanel extends UiPart<Region> {
             this.trackableFieldsTabPane.getTabs().add(this.exerciseTab);
 
             List<Exercise> sortedExercises = exercises.stream()
-                .sorted(Comparator.comparing(Exercise::getName))
-                .collect(Collectors.toList());
+                    .sorted(Comparator.comparing(Exercise::getName))
+                    .collect(Collectors.toList());
 
             for (Exercise exercise : sortedExercises) {
                 final String exerciseAttrDescStyle = "-fx-text-fill: white; -fx-font-size: 12px;";
                 final String exerciseAttrValueStyle =
-                    "-fx-background-color: #2E2E2E; -fx-padding: 2 5 2 5; -fx-text-fill: white; -fx-font-size: 12px;";
+                        "-fx-background-color: #2E2E2E; -fx-padding: 2 5 2 5; -fx-text-fill: white; -fx-font-size: "
+                                + "12px;";
 
                 Label exerciseName = new Label(StringUtil.capitalizeWords(exercise.getName()));
 
@@ -370,5 +364,16 @@ public class PersonDetailsPanel extends UiPart<Region> {
         this.person.getTags().stream()
                 .sorted(Comparator.comparing(Tag::toString))
                 .forEach(tag -> this.tags.getChildren().add(new Label(tag.toString())));
+    }
+
+    private void updateLatestWeight() {
+        Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = this.person.getLatestWeight();
+        if (latestWeight.isPresent()) {
+            LocalDate numericDate = latestWeight.get().getKey().toLocalDate();
+            String formattedDate = numericDate.format(DateTimeUtil.DATE_FORMATTER);
+            this.weightDate.setText(WeightCommandMessages.WEIGHT_DATE_HEADER + formattedDate);
+            this.weightValue.setText(WeightCommandMessages.WEIGHT_VALUE_HEADER
+                    + latestWeight.get().getValue().toString() + " kg");
+        }
     }
 }
