@@ -112,6 +112,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
     public void initialize() {
         // Initialize tab pane
         this.trackableFieldsTabPane.setStyle("-fx-open-tab-animation: NONE; -fx-close-tab-animation: NONE;");
+        this.trackableFieldsTabPane.getStyleClass().add("grid-pane");
 
         // Initialize weight chart
         CategoryAxis xAxis = new CategoryAxis();
@@ -165,11 +166,11 @@ public class PersonDetailsPanel extends UiPart<Region> {
     public void update(Person person) {
         this.person = person;
         this.detailsPane.setVisible(true);
+        this.trackableFieldsTabPane.setVisible(true);
 
         this.updateUntrackedDetails();
 
-        // Clear tabs
-        this.trackableFieldsTabPane.getTabs().clear();
+        this.hideTabs();
 
         this.addWeightTab();
         this.addExercisesTab();
@@ -193,7 +194,9 @@ public class PersonDetailsPanel extends UiPart<Region> {
         this.height.setText("");
         this.tags.getChildren().clear();
         this.qrcode.setImage(null);
-        this.trackableFieldsTabPane.getTabs().clear();
+        this.getWeightTab().getContent().setVisible(false);
+        this.getExerciseTab().getContent().setVisible(false);
+        this.trackableFieldsTabPane.setVisible(false);
     }
 
     private XYChart.Series<String, Number> generateWeightSeries(Person p) {
@@ -303,7 +306,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
     private void addWeightTab() {
         if (this.person.hasWeight()) {
-            this.trackableFieldsTabPane.getTabs().add(0, this.weightTab);
+            this.getWeightTab().getContent().setVisible(true);
             XYChart.Series<String, Number> weightSeries = this.generateWeightSeries(this.person);
 
             this.weightChart.getData().clear();
@@ -321,7 +324,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         Set<Exercise> exercises = this.person.getExerciseSet().getValue();
 
         if (!exercises.isEmpty()) {
-            this.trackableFieldsTabPane.getTabs().add(this.exerciseTab);
+            this.getExerciseTab().getContent().setVisible(true);
 
             List<Exercise> sortedExercises = exercises.stream()
                     .sorted(Comparator.comparing(Exercise::getName))
@@ -406,5 +409,10 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
         this.exercisesBox.getChildren().clear();
         this.exercisesBox.getChildren().add(exercisesTitle);
+    }
+
+    private void hideTabs() {
+        this.getWeightTab().getContent().setVisible(false);
+        this.getExerciseTab().getContent().setVisible(false);
     }
 }
