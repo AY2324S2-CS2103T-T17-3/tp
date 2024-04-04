@@ -47,6 +47,9 @@ import seedu.address.model.tag.Tag;
 public class PersonDetailsPanel extends UiPart<Region> {
     public static final String FXML = "PersonDetailsPanel.fxml";
     private static final Logger logger = LogsCenter.getLogger(PersonDetailsPanel.class);
+    private static final String EXERCISE_ATTR_DESC_STYLE = "-fx-text-fill: white; -fx-font-size: 12px;";
+    private static final String EXERCISE_ATTR_VALUE_STYLE =
+            "-fx-background-color: #2E2E2E; -fx-padding: 2 5 2 5; " + "-fx-text-fill: white; -fx-font-size: 12px;";
 
     @FXML
     private VBox detailsPane;
@@ -171,20 +174,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         this.addWeightTab();
         this.addExercisesTab();
 
-        // Bind manageability (presence) of node based on presence of value for optional fields
-        this.address.setVisible(!person.getAddress().getValue().isEmpty());
-        this.email.setVisible(!person.getEmail().getValue().isEmpty());
-        this.note.setVisible(!person.getNote().getValue().isEmpty());
-        this.weightDate.setVisible(latestWeight.isPresent());
-        this.weightValue.setVisible(latestWeight.isPresent());
-        this.height.setVisible(person.getHeight().isValid());
-
-        this.address.managedProperty().bind(this.address.visibleProperty());
-        this.email.managedProperty().bind(this.email.visibleProperty());
-        this.weightDate.managedProperty().bind(this.weightDate.visibleProperty());
-        this.weightValue.managedProperty().bind(this.weightValue.visibleProperty());
-        this.height.managedProperty().bind(this.height.visibleProperty());
-        this.note.managedProperty().bind(this.note.visibleProperty());
+        this.hideUninitializedFields();
 
         logger.info("Displayed details of person: " + person);
     }
@@ -279,9 +269,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
     private void updateTags() {
         // Clear tags and set new ones
         this.tags.getChildren().clear();
-        this.person.getTags().stream()
-                .sorted(Comparator.comparing(Tag::toString))
-                .forEach(tag -> this.tags.getChildren().add(new Label(tag.toString())));
+        this.person.getTags().stream().sorted(Comparator.comparing(Tag::toString)).forEach(
+                tag -> this.tags.getChildren().add(new Label(tag.toString())));
     }
 
     private void updateLatestWeight() {
@@ -290,8 +279,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
             LocalDate numericDate = latestWeight.get().getKey().toLocalDate();
             String formattedDate = numericDate.format(DateTimeUtil.DATE_FORMATTER);
             this.weightDate.setText(WeightCommandMessages.WEIGHT_DATE_HEADER + formattedDate);
-            this.weightValue.setText(WeightCommandMessages.WEIGHT_VALUE_HEADER
-                    + latestWeight.get().getValue().toString() + " kg");
+            this.weightValue.setText(
+                    WeightCommandMessages.WEIGHT_VALUE_HEADER + latestWeight.get().getValue().toString() + " kg");
         }
     }
 
@@ -315,7 +304,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
     private void addWeightTab() {
         if (this.person.hasWeight()) {
             this.trackableFieldsTabPane.getTabs().add(0, this.weightTab);
-            XYChart.Series<String, Number> weightSeries = this.generateWeightSeries(person);
+            XYChart.Series<String, Number> weightSeries = this.generateWeightSeries(this.person);
 
             this.weightChart.getData().clear();
             this.weightChart.getData().add(weightSeries);
@@ -323,15 +312,12 @@ public class PersonDetailsPanel extends UiPart<Region> {
     }
 
     private void addExercisesTab() {
-        // Display exercises
-        Label exercisesTitle = new Label("Exercises");
-        exercisesTitle.setStyle("-fx-text-fill: white; -fx-font-size: 18px;");
-        exercisesTitle.setMaxWidth(Double.MAX_VALUE);
-        exercisesTitle.setAlignment(Pos.CENTER);
+        this.initializeExercisesTabLabel();
 
-        this.exercisesBox.getChildren().clear();
-        this.exercisesBox.getChildren().add(exercisesTitle);
+        this.populateExercisesBox();
+    }
 
+    private void populateExercisesBox() {
         Set<Exercise> exercises = this.person.getExerciseSet().getValue();
 
         if (!exercises.isEmpty()) {
@@ -342,48 +328,83 @@ public class PersonDetailsPanel extends UiPart<Region> {
                     .collect(Collectors.toList());
 
             for (Exercise exercise : sortedExercises) {
-                final String exerciseAttrDescStyle = "-fx-text-fill: white; -fx-font-size: 12px;";
-                final String exerciseAttrValueStyle =
-                        "-fx-background-color: #2E2E2E; -fx-padding: 2 5 2 5; -fx-text-fill: white; -fx-font-size: "
-                                + "12px;";
-
-                Label exerciseName = new Label(StringUtil.capitalizeWords(exercise.getName()));
-
-                exerciseName.setWrapText(true);
-                exerciseName.setUnderline(true);
-                exerciseName.setStyle("-fx-text-fill: white; -fx-font-size: 15px;");
-                exerciseName.setPadding(new Insets(10, 0, 0, 0));
-
-                Label setsLabel = new Label("Sets:");
-                setsLabel.setStyle(exerciseAttrDescStyle);
-                Label setsValue = new Label(String.valueOf(exercise.getSets()));
-                setsValue.setStyle(exerciseAttrValueStyle);
-
-                Label repsLabel = new Label("Reps:");
-                repsLabel.setStyle(exerciseAttrDescStyle);
-                Label repsValue = new Label(String.valueOf(exercise.getReps()));
-                repsValue.setStyle(exerciseAttrValueStyle);
-
-                Label breakLabel = new Label("Break between sets:");
-                breakLabel.setStyle(exerciseAttrDescStyle);
-                Label breakValue = new Label(exercise.getBreakBetweenSets() + " seconds");
-                breakValue.setStyle(exerciseAttrValueStyle);
-
-                HBox setsBox = new HBox(10, setsLabel, setsValue);
-                HBox repsBox = new HBox(10, repsLabel, repsValue);
-                HBox breakBox = new HBox(10, breakLabel, breakValue);
-
-                setsBox.setPadding(new Insets(10, 0, 10, 0));
-                repsBox.setPadding(new Insets(10, 0, 10, 0));
-                breakBox.setPadding(new Insets(10, 0, 10, 0));
-
-                setsBox.setPrefWidth(130);
-                repsBox.setPrefWidth(130);
-                breakBox.setPrefWidth(250);
-
-                HBox exerciseBox = new HBox(setsBox, repsBox, breakBox);
+                Label exerciseName = this.createExerciseNameLabel(exercise);
+                HBox exerciseBox = this.createExerciseBox(exercise);
                 this.exercisesBox.getChildren().addAll(exerciseName, exerciseBox, new Separator());
             }
         }
+    }
+
+    private Label createExerciseNameLabel(Exercise exercise) {
+        Label exerciseName = new Label(StringUtil.capitalizeWords(exercise.getName()));
+
+        exerciseName.setWrapText(true);
+        exerciseName.setUnderline(true);
+        exerciseName.setStyle("-fx-text-fill: white; -fx-font-size: 15px;");
+        exerciseName.setPadding(new Insets(10, 0, 0, 0));
+
+        return exerciseName;
+    }
+
+    private HBox createExerciseBox(Exercise exercise) {
+        Label setsLabel = new Label("Sets:");
+        setsLabel.setStyle(EXERCISE_ATTR_DESC_STYLE);
+        Label setsValue = new Label(String.valueOf(exercise.getSets()));
+        setsValue.setStyle(EXERCISE_ATTR_VALUE_STYLE);
+
+        Label repsLabel = new Label("Reps:");
+        repsLabel.setStyle(EXERCISE_ATTR_DESC_STYLE);
+        Label repsValue = new Label(String.valueOf(exercise.getReps()));
+        repsValue.setStyle(EXERCISE_ATTR_VALUE_STYLE);
+
+        Label breakLabel = new Label("Break between sets:");
+        breakLabel.setStyle(EXERCISE_ATTR_DESC_STYLE);
+        Label breakValue = new Label(exercise.getBreakBetweenSets() + " seconds");
+        breakValue.setStyle(EXERCISE_ATTR_VALUE_STYLE);
+
+        HBox setsBox = new HBox(10, setsLabel, setsValue);
+        HBox repsBox = new HBox(10, repsLabel, repsValue);
+        HBox breakBox = new HBox(10, breakLabel, breakValue);
+
+        setsBox.setPadding(new Insets(10, 0, 10, 0));
+        repsBox.setPadding(new Insets(10, 0, 10, 0));
+        breakBox.setPadding(new Insets(10, 0, 10, 0));
+
+        setsBox.setPrefWidth(130);
+        repsBox.setPrefWidth(130);
+        breakBox.setPrefWidth(250);
+
+        return new HBox(setsBox, repsBox, breakBox);
+    }
+
+    /**
+     * Hide optional fields that have not been initialized.
+     */
+    private void hideUninitializedFields() {
+        // Bind manageability (presence) of node based on presence of value for optional fields
+        this.address.setVisible(!this.person.getAddress().getValue().isEmpty());
+        this.email.setVisible(!this.person.getEmail().getValue().isEmpty());
+        this.note.setVisible(!this.person.getNote().getValue().isEmpty());
+        this.weightDate.setVisible(this.person.hasWeight());
+        this.weightValue.setVisible(this.person.hasWeight());
+        this.height.setVisible(this.person.getHeight().isValid());
+
+        this.address.managedProperty().bind(this.address.visibleProperty());
+        this.email.managedProperty().bind(this.email.visibleProperty());
+        this.weightDate.managedProperty().bind(this.weightDate.visibleProperty());
+        this.weightValue.managedProperty().bind(this.weightValue.visibleProperty());
+        this.height.managedProperty().bind(this.height.visibleProperty());
+        this.note.managedProperty().bind(this.note.visibleProperty());
+    }
+
+    private void initializeExercisesTabLabel() {
+        // Display exercises
+        Label exercisesTitle = new Label("Exercises");
+        exercisesTitle.setStyle("-fx-text-fill: white; -fx-font-size: 18px;");
+        exercisesTitle.setMaxWidth(Double.MAX_VALUE);
+        exercisesTitle.setAlignment(Pos.CENTER);
+
+        this.exercisesBox.getChildren().clear();
+        this.exercisesBox.getChildren().add(exercisesTitle);
     }
 }
