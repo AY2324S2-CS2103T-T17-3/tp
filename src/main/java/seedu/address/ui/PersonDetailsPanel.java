@@ -95,7 +95,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
      */
     public PersonDetailsPanel() {
         super(FXML);
-        clear();
+        this.clear();
     }
 
     private Tab getWeightTab() {
@@ -138,18 +138,18 @@ public class PersonDetailsPanel extends UiPart<Region> {
         this.weightChart.lookup(".chart-vertical-grid-lines").setStyle("-fx-stroke: white;");
         this.weightChart.requestLayout();
 
-        // Initialize notes box
+        // Initialize exercises box
         this.exercisesBox = new VBox();
         this.exercisesBox.setPadding(new Insets(10, 10, 10, 10));
         this.exercisesBox.setPrefHeight(200);
 
-        // Create a scroll pane and set the notes box as its content
+        // Create a scroll pane and set the exercises box as its content
         ScrollPane exerciseScrollPane = new ScrollPane(this.exercisesBox);
         exerciseScrollPane.setFitToWidth(true);
         exerciseScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         exerciseScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
-        // Add charts and notes scroll pane to respective tabs
+        // Add charts and exercises scroll pane to respective tabs
         this.weightTab = this.getWeightTab();
         this.weightTab.setContent(this.weightChart);
 
