@@ -15,7 +15,7 @@
 
 <ScrollPane fx:id="detailsScrollPane" fitToHeight="true" fitToWidth="true" style="-fx-background:transparent; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
     <VBox fx:id="detailsPane" visible="false">
-        <GridPane alignment="TOP_CENTER" maxHeight="150.0" VBox.vgrow="ALWAYS">
+        <GridPane alignment="TOP_CENTER" maxHeight="180.0" VBox.vgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" prefWidth="150" />
             <ColumnConstraints hgrow="NEVER" />
