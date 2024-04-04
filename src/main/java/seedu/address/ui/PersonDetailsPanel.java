@@ -169,11 +169,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
         this.address.setText(person.getAddress().toString());
         this.email.setText(person.getEmail().toString());
 
-        // Clear tags and set new ones
-        this.tags.getChildren().clear();
-        person.getTags().stream()
-            .sorted(Comparator.comparing(Tag::toString))
-            .forEach(tag -> this.tags.getChildren().add(new Label(tag.toString())));
+        this.updateTags();
+
 
         Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = person.getLatestWeight();
         if (latestWeight.isPresent()) {
@@ -365,5 +362,13 @@ public class PersonDetailsPanel extends UiPart<Region> {
             label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
             return label;
         }
+    }
+
+    private void updateTags() {
+        // Clear tags and set new ones
+        this.tags.getChildren().clear();
+        this.person.getTags().stream()
+                .sorted(Comparator.comparing(Tag::toString))
+                .forEach(tag -> this.tags.getChildren().add(new Label(tag.toString())));
     }
 }
