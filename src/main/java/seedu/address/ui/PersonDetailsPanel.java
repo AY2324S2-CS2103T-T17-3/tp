@@ -147,10 +147,10 @@ public class PersonDetailsPanel extends UiPart<Region> {
         exerciseScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
         // Add charts and notes scroll pane to respective tabs
-        this.weightTab = getWeightTab();
+        this.weightTab = this.getWeightTab();
         this.weightTab.setContent(this.weightChart);
 
-        this.exerciseTab = getExerciseTab();
+        this.exerciseTab = this.getExerciseTab();
         this.exerciseTab.setContent(exerciseScrollPane);
     }
 
@@ -163,20 +163,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         this.person = person;
         this.detailsPane.setVisible(true);
 
-        // Set fields with information from the person
-        this.name.setText(person.getName().toString());
-        this.phone.setText(person.getPhone().toString());
-        this.address.setText(person.getAddress().toString());
-        this.email.setText(person.getEmail().toString());
-
-        this.updateTags();
-
-        this.updateLatestWeight();
-
-
-        this.height.setText(person.getHeight().getFormattedHeight());
-        this.note.setText(person.getNote().toString());
-        this.qrcode.setImage(new Image(person.getQrCodePath().toUri().toString()));
+        this.updateUntrackedDetails();
 
         // Clear tabs
         this.trackableFieldsTabPane.getTabs().clear();
@@ -184,7 +171,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         // Display weights graph
         if (latestWeight.isPresent()) {
             this.trackableFieldsTabPane.getTabs().add(0, this.weightTab);
-            XYChart.Series<String, Number> weightSeries = generateWeightSeries(person);
+            XYChart.Series<String, Number> weightSeries = this.generateWeightSeries(person);
 
             this.weightChart.getData().clear();
             this.weightChart.getData().add(weightSeries);
@@ -319,26 +306,26 @@ public class PersonDetailsPanel extends UiPart<Region> {
     }
 
     private static class HoveredThresholdNode extends StackPane {
-        private final Label label = createDataThresholdLabel();
-        private final Node point = createDataPoint();
+        private final Label label = this.createDataThresholdLabel();
+        private final Node point = this.createDataPoint();
 
         /**
          * Creates a new HoveredThresholdNode.
          */
         public HoveredThresholdNode(String value, String prefix, String postfix) {
-            setPrefSize(10, 10);
+            this.setPrefSize(10, 10);
 
-            setOnMouseEntered(event -> {
-                getChildren().setAll(this.point, this.label);
+            this.setOnMouseEntered(event -> {
+                this.getChildren().setAll(this.point, this.label);
                 this.label.setText(String.format("%s%s%s", prefix, value, postfix));
-                toFront();
+                this.toFront();
             });
-            setOnMouseExited(event -> {
-                getChildren().setAll(this.point);
+            this.setOnMouseExited(event -> {
+                this.getChildren().setAll(this.point);
             });
 
-            setStyle("-fx-background-color: white; -fx-background-radius: 5px; -fx-padding: 2px;");
-            getChildren().setAll(this.point);
+            this.setStyle("-fx-background-color: white; -fx-background-radius: 5px; -fx-padding: 2px;");
+            this.getChildren().setAll(this.point);
         }
 
         private Node createDataPoint() {
@@ -375,5 +362,22 @@ public class PersonDetailsPanel extends UiPart<Region> {
             this.weightValue.setText(WeightCommandMessages.WEIGHT_VALUE_HEADER
                     + latestWeight.get().getValue().toString() + " kg");
         }
+    }
+
+    private void updateUntrackedDetails() {
+        // Set fields with information from the person
+        this.name.setText(this.person.getName().toString());
+        this.phone.setText(this.person.getPhone().toString());
+        this.address.setText(this.person.getAddress().toString());
+        this.email.setText(this.person.getEmail().toString());
+
+        this.updateTags();
+
+        this.updateLatestWeight();
+
+
+        this.height.setText(this.person.getHeight().getFormattedHeight());
+        this.note.setText(this.person.getNote().toString());
+        this.qrcode.setImage(new Image(this.person.getQrCodePath().toUri().toString()));
     }
 }
