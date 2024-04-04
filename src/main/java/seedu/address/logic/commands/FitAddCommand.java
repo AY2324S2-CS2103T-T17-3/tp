@@ -14,6 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.ExerciseSet;
 import seedu.address.model.person.Person;
+import seedu.address.ui.MainWindow;
 
 /**
  * Adds a new exercise or overwrites an existing exercise of a person in the address book.
@@ -113,6 +114,8 @@ public class FitAddCommand extends Command {
             personToEdit.getNote(), personToEdit.getTags(), updatedExerciseSet);
 
         model.setPerson(personToEdit, editedPerson);
+
+        MainWindow.getInstance().getPersonDetailsPanel().selectExerciseTab();
 
         return new CommandResult(FitAddCommandMessages.MESSAGE_ADD_EXERCISE_SUCCESS);
     }

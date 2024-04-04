@@ -14,6 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.ExerciseSet;
 import seedu.address.model.person.Person;
+import seedu.address.ui.MainWindow;
 
 /**
  * Deletes an exercise from a person in the address book.
@@ -52,6 +53,8 @@ public class FitDeleteCommand extends Command {
         Person editedPerson = getEditedPerson(personToEdit);
 
         model.setPerson(personToEdit, editedPerson);
+
+        MainWindow.getInstance().getPersonDetailsPanel().selectExerciseTab();
 
         return new CommandResult(
             String.format(this.deleteAll ? FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_SUCCESS
