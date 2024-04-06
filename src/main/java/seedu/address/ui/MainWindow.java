@@ -276,8 +276,4 @@ public class MainWindow extends UiPart<Stage> {
     public void moveCommandBoxCursorToEnd() {
         this.commandBox.moveCursorToEnd();
     }
-
-    public PersonDetailsPanel getPersonDetailsPanel() {
-        return this.personDetailsPanel;
-    }
 }

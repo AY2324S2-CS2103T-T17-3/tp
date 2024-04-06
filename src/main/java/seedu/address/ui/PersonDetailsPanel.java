@@ -407,8 +407,4 @@ public class PersonDetailsPanel extends UiPart<Region> {
         this.exercisesBox.getChildren().clear();
         this.exercisesBox.getChildren().add(exercisesTitle);
     }
-
-    public void selectExerciseTab() {
-        this.trackableFieldsTabPane.getSelectionModel().select(this.exerciseTab);
-    }
 }
