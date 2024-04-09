@@ -640,4 +640,4 @@ Team size: 5
 
 1. **Switch to the tab of data modified**
 
-Currently, the tab on the bottom of the details panel always switches to the 'Weight' tab when any details of a person is updated. We plan to make the tab switch to the 'Weight' tab when weight is modified, and the 'Exercises' tab when exercises are modified. Otherwise, the tab should not change when any other fields are modified.
+Currently, the tab on the bottom of the details panel always switches to the 'Weight' tab when any details of a client is updated. We plan to make the tab switch to the 'Weight' tab when weight is modified, and the 'Exercises' tab when exercises are modified. Otherwise, the tab should not change when any other fields are modified.
