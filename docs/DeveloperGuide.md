@@ -667,9 +667,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to see a list of all clients
-1. FitBook displays a success message followed by the list of clients
-1. User views the list and enters the `weight` command to add/delete a weight value of a client
+1. User requests to see a list of all clients.
+1. FitBook displays a success message followed by the list of clients.
+1. User views the list and enters the `weight` command to add/delete a weight value of a client.
 1. FitBook displays a success message indicating that the weight of a client has been modified successfully.
 1. Use case ends
 
@@ -679,8 +679,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. FitBook alerts the user that the command is invalid and displays the correct format
     * Use case ends
 * 3b. User enters a weight of '0' or does not enter a weight value
-    * 3b1. FitBook removes the latest weight value of the client and displays success message that the latest weight value of the client has been modified successfully.
-    * 3b2. FitBook displays failure message indicating that there are no weight values to be removed from the specified client.
+    * If there are weight values to be removed, FitBook displays a success message. Else, FitBook displays an error message indicating that there are no weight values to be removed.
     * Use case ends
 
 <hr>
