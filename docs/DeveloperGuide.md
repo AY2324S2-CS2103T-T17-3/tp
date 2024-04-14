@@ -659,6 +659,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <hr>
 
+**System**: FitBook
+
+**Use case**: UC05 - Modifying weight of a client
+
+**Actor**: User
+
+**MSS**
+
+1. User requests to see a list of all clients
+1. FitBook displays a success message followed by the list of clients
+1. User views the list and enters the `weight` command to modify the weight of a client
+1. FitBook displays a success message indicating that the weight of a client has been modified successfully.
+1. Use case ends
+
+**Extensions**
+
+* 3a. User enters an invalid command
+    * 3a1. FitBook alerts the user that the command is invalid and displays the correct format
+    * Use case ends
+* 3b. User enters a weight of '0' or does not enter a weight value
+    * 3b1. FitBook removes the latest weight value of the client and displays success message that the latest weight value of the client has been modified successfully.
+    * 3b2. FitBook displays failure message indicating that there are no weight values to be removed from the specified client.
+    * Use case ends
+
+<hr>
+
+**System**: FitBook
+
+**Use case**: UC06 - Searching for a weight/height range
+
+**Actor**: User
+
+**MSS**
+
+1. User requests to see a list of all clients with a specified weight/height range
+1. FitBook displays a success message followed by the list of clients
+1. Use case ends
+
+**Extensions**
+
+* 2a. User enters an invalid command
+    * 3a1. FitBook alerts the user that the command is invalid and displays the correct format
+    * Use case ends
+
+<hr>
+
+
 ### Non-Functional Requirements
 
 <a id="nfr-1"></a>
