@@ -661,7 +661,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **System**: FitBook
 
-**Use case**: UC05 - Modifying weight of a client
+**Use case**: UC05 - Adding/removing weight of a client
 
 **Actor**: User
 
@@ -669,7 +669,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to see a list of all clients
 1. FitBook displays a success message followed by the list of clients
-1. User views the list and enters the `weight` command to modify the weight of a client
+1. User views the list and enters the `weight` command to add/delete a weight value of a client
 1. FitBook displays a success message indicating that the weight of a client has been modified successfully.
 1. Use case ends
 
