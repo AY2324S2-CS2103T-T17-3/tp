@@ -675,12 +675,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. User enters an invalid command
-    * 3a1. FitBook alerts the user that the command is invalid and displays the correct format
-    * Use case ends
-* 3b. User enters a weight of '0' or does not enter a weight value
+* 3a. User enters an invalid command.
+    * FitBook alerts the user that the command is invalid and displays the correct format.
+    * Use case ends.
+* 3b. User enters a weight of '0' or does not enter a weight value.
     * If there are weight values to be removed, FitBook displays a success message. Else, FitBook displays an error message indicating that there are no weight values to be removed.
-    * Use case ends
+    * Use case ends.
 
 <hr>
 
@@ -692,15 +692,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to see a list of all clients with a specified weight/height range
-1. FitBook displays a success message followed by the list of clients
-1. Use case ends
+1. User requests to see a list of all clients with a specified weight/height range.
+1. FitBook displays a success message followed by the list of clients.
+1. Use case ends.
 
 **Extensions**
 
-* 2a. User enters an invalid command
-    * 3a1. FitBook alerts the user that the command is invalid and displays the correct format
-    * Use case ends
+* 1a. User enters an invalid command.
+    * FitBook alerts the user that the command is invalid and displays the correct format.
+    * Use case ends.
 
 <hr>
 
