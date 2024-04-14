@@ -676,10 +676,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 3a. User enters an invalid command.
-    * FitBook alerts the user that the command is invalid and displays the correct format.
+    * 3a1. FitBook alerts the user that the command is invalid and displays the correct format.
     * Use case ends.
 * 3b. User wants to remove a weight value.
-    * If there are weight values to be removed, FitBook displays a success message. Else, FitBook displays an error message indicating that there are no weight values to be removed.
+    * 3b1. If there are weight values to be removed, FitBook displays a success message. Else, FitBook displays an error message indicating that there are no weight values to be removed.
     * Use case ends.
 
 <hr>
@@ -699,7 +699,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. User enters an invalid command.
-    * FitBook alerts the user that the command is invalid and displays the correct format.
+    * 1a1. FitBook alerts the user that the command is invalid and displays the correct format.
     * Use case ends.
 
 <hr>
