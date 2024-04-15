@@ -689,7 +689,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <hr>
 
-**Use case**: UC06 - Delete Exercise for a Client
+**Use case**: UC06 - Delete exercise for a client
 
 **System**: FitBook
 
