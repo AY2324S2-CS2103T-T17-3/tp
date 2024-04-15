@@ -996,3 +996,9 @@ FitBook's team size is 5.
     Some commands require the use of unnecessary prefixes which might slightly inconvenience the user.
 
     For example, the `fitdelete` command currently has the format `fitdelete INDEX n/EXERCISE_NAME`. Removing the requirement of specifying the `n/` prefix will provide greater convenience to the user by requiring them to type less. Furthermore, it will address issues that come with specifying multiple `n/` prefixes.
+
+1. **Show an error message on the GUI when JSON file is corrupted**
+
+   Currently, FitBook starts with an empty JSON file when a corrupted JSON file is being loaded upon startup. The user does not get notified on the GUI that the previous JSON file is corrupted, and only sees an empty client list on the FitBook GUI.
+
+   We plan to show an error message to the user on the GUI when a corrupted file is being loaded, and inform the user that FitBook will start with an empty JSON file instead.
