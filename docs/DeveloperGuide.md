@@ -781,7 +781,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **System**: FitBook
 
-**Use case**: UC05 - Adding/removing weight of a client
+**Use case**: UC09 - Adding/removing weight of a client
 
 **Actor**: User
 
@@ -806,7 +806,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **System**: FitBook
 
-**Use case**: UC06 - Searching for a weight/height range
+**Use case**: UC10 - Searching for a weight/height range
 
 **Actor**: User
 
