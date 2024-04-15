@@ -171,7 +171,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the address book data i.e. all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
   is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
@@ -314,7 +314,7 @@ Note that the main searching logic is defined by creating a `Predicate` (`NameCo
 #### Defining new methods of finding clients
 All attributes of a `Person` has been abstracted into an `Attribute` class. This `Attribute` class defines an abstract `isMatch()` method, thus, any attributes of a `Person` (new or existing), would be required to implement the `isMatch()` method to define how the attribute can be searched using the `find` command.
 
-This is what allows the `find` command to be extendable to any attribute of a `Person`. Each attribute can be defined to be searched in different ways. For example, searching a person's `Name` would test a substring against the `Name` attribute, searching a person's `Weight` would test the `Weight` attribute against a range specified (i.e `isMatch()` will return `true` if the person's weight falls within the specified range).
+This is what allows the `find` command to be extendable to any attribute of a `Person`. Each attribute can be defined to be searched in different ways. For example, searching a person's `Name` would test a substring against the `Name` attribute, searching a person's `Weight` would test the `Weight` attribute against a range specified (i.e. `isMatch()` will return `true` if the person's weight falls within the specified range).
 
 Therefore, to define how an attribute is being searched, one would simply take the following steps:
 1. Define the implementation of the `isMatch()` method of the respective attribute. (e.g. `Name::isMatch()`)
