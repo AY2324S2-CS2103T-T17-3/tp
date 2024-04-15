@@ -160,7 +160,7 @@ How the parsing works:
   the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as
   a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
-  interface so that they can be treated similarly where possible e.g, during testing.
+  interface so that they can be treated similarly where possible e.g., during testing.
 
 ### Model component
 
@@ -314,11 +314,11 @@ Note that the main searching logic is defined by creating a `Predicate` (`NameCo
 #### Defining new methods of finding clients
 All attributes of a `Person` has been abstracted into an `Attribute` class. This `Attribute` class defines an abstract `isMatch()` method, thus, any attributes of a `Person` (new or existing), would be required to implement the `isMatch()` method to define how the attribute can be searched using the `find` command.
 
-This is what allows the `find` command to be extendable to any attribute of a `Person`. Each attribute can be defined to be searched in different ways. For example, searching a person's `Name` would test a substring against the `Name` attribute, searching a person's `Weight` would test the `Weight` attribute against a range specified (i.e `isMatch()` will return `true` if the person's weight falls within the specified range).
+This is what allows the `find` command to be extendable to any attribute of a `Person`. Each attribute can be defined to be searched in different ways. For example, searching a person's `Name` would test a substring against the `Name` attribute, searching a person's `Weight` would test the `Weight` attribute against a range specified (i.e. `isMatch()` will return `true` if the person's weight falls within the specified range).
 
 Therefore, to define how an attribute is being searched, one would simply take the following steps:
-1. Define the implementation of the `isMatch()` method of the respective attribute. (e.g `Name::isMatch()`)
-1. Create a new class that extends `SearchPredicate` (e.g `NameContainsSubstringPredicate`)
+1. Define the implementation of the `isMatch()` method of the respective attribute. (e.g. `Name::isMatch()`)
+1. Create a new class that extends `SearchPredicate` (e.g. `NameContainsSubstringPredicate`)
 1. Update the `parse()` method in `FindCommandParser` to uses the new predicate
 
 #### Implementation Rationale
@@ -812,7 +812,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 1. Should provide responsive performance, users should experience minimal delays in critical functionalities such as searching and updating contacts (feedback should be within 1 second).
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-1. Should provide an intuitive and user-friendly interface. Users should be able to easily and quickly navigate the user interface to identify crucial information (E.g Name, Contact, Health information) at a glance.
+1. Should provide an intuitive and user-friendly interface. Users should be able to easily and quickly navigate the user interface to identify crucial information (e.g. Name, Contact, Health information) at a glance.
 1. Should have a shallow learning curve. New users (including the non-technically savvy) should be able to pick up and start using the application efficiently within a week.
 1. Should be optimized to run smoothly on low-end devices with limited processing power and memory. Users on older hardware should be able to use the application as long as it meets [this requirement](#nfr-1).
 1. Should provide full offline functionality. Users should be able to access all functionality of FitBook even when the device is not connected to the internet.
