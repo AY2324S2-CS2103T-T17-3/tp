@@ -722,12 +722,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to find clients by filtering based on attributes.
-1. Fitbook displays a success message with the number of clients found, along with the filtered list of clients.
+1. FitBook displays a success message with the number of clients found, along with the filtered list of clients.
 1. Use case ends.
 
 **Extensions**
 * 1a. User does not specify any attribute to filter by.
-  * 1a1. Fitbook alerts the user that the command is invalid and displays the correct command format
+  * 1a1. FitBook alerts the user that the command is invalid and displays the correct command format
   * Step 1a1 is repeated until the user specifies an attribute to filter by.
   * Use case resumes at step 2.
 
