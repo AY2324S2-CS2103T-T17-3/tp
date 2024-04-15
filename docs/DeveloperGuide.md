@@ -317,8 +317,8 @@ All attributes of a `Person` has been abstracted into an `Attribute` class. This
 This is what allows the `find` command to be extendable to any attribute of a `Person`. Each attribute can be defined to be searched in different ways. For example, searching a person's `Name` would test a substring against the `Name` attribute, searching a person's `Weight` would test the `Weight` attribute against a range specified (i.e `isMatch()` will return `true` if the person's weight falls within the specified range).
 
 Therefore, to define how an attribute is being searched, one would simply take the following steps:
-1. Define the implementation of the `isMatch()` method of the respective attribute. (e.g `Name::isMatch()`)
-1. Create a new class that extends `SearchPredicate` (e.g `NameContainsSubstringPredicate`)
+1. Define the implementation of the `isMatch()` method of the respective attribute. (e.g. `Name::isMatch()`)
+1. Create a new class that extends `SearchPredicate` (e.g. `NameContainsSubstringPredicate`)
 1. Update the `parse()` method in `FindCommandParser` to uses the new predicate
 
 #### Implementation Rationale
