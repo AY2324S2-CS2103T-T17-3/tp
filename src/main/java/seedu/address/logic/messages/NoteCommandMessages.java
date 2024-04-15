@@ -10,7 +10,7 @@ public class NoteCommandMessages extends Messages {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Updates and overrides the note of the client identified "
             + "by their corresponding index.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer) [NOTE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "Likes to swim.";
     public static final String MESSAGE_EDIT_FEEDBACK_TO_USER = "Editing note for client: ";

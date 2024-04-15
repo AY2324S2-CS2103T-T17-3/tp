@@ -3,15 +3,17 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
+skinparam linetype ortho
 
 package UI <<Rectangle>>{
 Class "<<interface>>\nUi" as Ui
-Class "{abstract}\nUiPart" as UiPart
+Class "\n\n          {abstract}          \nUiPart\n\n" as UiPart
 Class UiManager
-Class MainWindow
+Class "\n\n     MainWindow     \n\n" as MainWindow
 Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
+Class PersonDetailsPanel
 Class PersonCard
 Class StatusBarFooter
 Class CommandBox
@@ -32,8 +34,10 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
+MainWindow *-down-> "1" PersonDetailsPanel
+MainWindow *-down-> "1" PersonListPanel
+PersonListPanel -[hidden] PersonDetailsPanel
 MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
@@ -43,6 +47,7 @@ MainWindow -left-|> UiPart
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 PersonListPanel --|> UiPart
+PersonDetailsPanel --|> UiPart
 PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart

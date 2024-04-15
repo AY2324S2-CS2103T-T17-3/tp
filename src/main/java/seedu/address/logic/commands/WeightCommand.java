@@ -23,7 +23,6 @@ import seedu.address.model.person.weight.WeightEntry;
  * Changes the weight of an existing person in the address book.
  */
 public class WeightCommand extends Command {
-
     private final Index index;
     private final WeightEntry weightEntry;
     private LocalDateTime timeOfExecution = null;
@@ -80,8 +79,10 @@ public class WeightCommand extends Command {
 
     /**
      * Generates a command execution success message based on whether
-     * the weight is added to or removed from
-     * {@code personToEdit}.
+     * the weight is added to or removed from {@code personToEdit}.
+     *
+     * @param personToEdit The person's weight to be edited.
+     * @return A formatted string that indicates the successful addition or deletion of a weight to the person.
      */
     private String generateSuccessMessage(Person personToEdit) {
         String message = !(this.weightEntry.getValue().getValue().isZero())

@@ -83,6 +83,7 @@ public class WeightMap extends Attribute<NavigableMap<LocalDateTime, Weight>> {
         return this.getValue().equals(otherMap.getValue());
     }
 
+    @Override
     public String toString() {
         return this.getValue().toString();
     }

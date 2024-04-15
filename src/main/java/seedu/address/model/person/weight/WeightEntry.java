@@ -25,6 +25,8 @@ public class WeightEntry extends Attribute<Map.Entry<LocalDateTime, Weight>> {
 
     /**
      * Returns a {@code LocalDateTime} that is rounded down to the nearest second.
+     *
+     * @return The current date and time, rounded down to the nearest second.
      */
     public static LocalDateTime getTimeOfExecution() {
         return LocalDateTime.now().withNano(0);

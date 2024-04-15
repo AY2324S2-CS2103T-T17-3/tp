@@ -20,7 +20,7 @@ box Storage STORAGE_COLOR_T1
 participant ":Storage" as Storage STORAGE_COLOR
 end box
 
-User -[USER_COLOR]> Ui : "note 1 nt/Hi"
+User -[USER_COLOR]> Ui : "note 1 Likes to eat"
 activate Ui UI_COLOR
 
 Ui -[UI_COLOR]> LogicManager : execute(...)
@@ -36,7 +36,7 @@ activate NoteCommandParser LOGIC_COLOR
 NoteCommandParser --[LOGIC_COLOR]> AddressBookParser
 deactivate NoteCommandParser
 
-AddressBookParser -[LOGIC_COLOR]> NoteCommandParser : parse(" 1 nt/Hi")
+AddressBookParser -[LOGIC_COLOR]> NoteCommandParser : parse(" 1 Likes to eat")
 activate NoteCommandParser LOGIC_COLOR
 
 create NoteCommand
@@ -59,7 +59,7 @@ deactivate AddressBookParser
 LogicManager -[LOGIC_COLOR]> NoteCommand : execute(m)
 activate NoteCommand LOGIC_COLOR
 
-NoteCommand -[LOGIC_COLOR]> Model : setPerson(1, "Hi");
+NoteCommand -[LOGIC_COLOR]> Model : setPerson(1, "Likes to eat");
 activate Model MODEL_COLOR
 
 Model --[MODEL_COLOR]> NoteCommand

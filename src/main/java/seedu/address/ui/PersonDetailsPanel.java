@@ -80,6 +80,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
     private Tab weightTab;
     private Tab exerciseTab;
     private LineChart<String, Number> weightChart;
+    private CategoryAxis weightXAxis;
     private NumberAxis weightYAxis;
     private VBox exercisesBox;
 
@@ -176,6 +177,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
             String dateString = date.format(DateTimeUtil.DATE_FORMATTER);
             Number weightNumber = weight.getValue();
+
             XYChart.Data<String, Number> weightData = new XYChart.Data<>(dateString, weightNumber);
             weightData.setNode(new HoveredThresholdNode(weightNumber.toString(), "", " kg"));
             weightSeries.getData().add(weightData);
@@ -284,13 +286,17 @@ public class PersonDetailsPanel extends UiPart<Region> {
     }
 
     private void updateWeightTab() {
+        this.initializeWeightChart();
+
         Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = this.person.getLatestWeight();
 
         if (latestWeight.isPresent()) {
             this.trackableFieldsTabPane.getTabs().add(0, this.weightTab);
-            XYChart.Series<String, Number> weightSeries = this.generateWeightSeries(this.person);
+            this.weightTab = this.getWeightTab();
+            this.weightTab.setContent(this.weightChart);
 
             this.weightChart.getData().clear();
+            XYChart.Series<String, Number> weightSeries = this.generateWeightSeries(this.person);
             this.weightChart.getData().add(weightSeries);
         }
     }
@@ -402,19 +408,19 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
     private void initializeWeightChart() {
         // Initialize weight chart
-        CategoryAxis xAxis = new CategoryAxis();
+        this.weightXAxis = new CategoryAxis();
         this.weightYAxis = new NumberAxis();
 
-        xAxis.setAnimated(false); // fixes the collapsed categories bug
-        xAxis.setLabel("Date");
-        xAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
+        this.weightXAxis.setAnimated(false); // fixes the collapsed categories bug
+        this.weightXAxis.setLabel("Date");
+        this.weightXAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
 
         this.weightYAxis.setAnimated(false);
         this.weightYAxis.setAutoRanging(false);
         this.weightYAxis.setLabel("Weight (kg)");
         this.weightYAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
 
-        this.weightChart = new LineChart<>(xAxis, this.weightYAxis);
+        this.weightChart = new LineChart<>(this.weightXAxis, this.weightYAxis);
         this.weightChart.setAnimated(false);
         this.weightChart.setHorizontalGridLinesVisible(false);
         this.weightChart.setVerticalGridLinesVisible(false);

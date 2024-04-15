@@ -36,6 +36,7 @@ import seedu.address.model.tag.Tag;
  */
 class JsonAdaptedPerson {
 
+    /** Represents a formatted string to indicate a missing field of a person. */
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;

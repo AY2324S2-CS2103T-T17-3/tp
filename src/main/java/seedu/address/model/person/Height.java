@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.person.messages.HeightMessages.MESSAGE_NO_HEIGHT;
 import static seedu.address.model.person.messages.HeightMessages.MESSAGE_RANGE;
-import static seedu.address.model.person.messages.HeightMessages.VALIDATION_REGEX;
 
 import javafx.util.Pair;
 
@@ -12,7 +11,10 @@ import javafx.util.Pair;
  * Guarantees: immutable; is always valid.
  */
 public class Height extends Attribute<Float> {
+    /** Represents a maximum value a Height. */
     public static final Float HEIGHT_MAX_VALUE = 5000f;
+    /** Regular expression to check for a valid height value. */
+    public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)?$";
 
     /**
      * Constructs a {@code height}.
@@ -26,6 +28,9 @@ public class Height extends Attribute<Float> {
 
     /**
      * Returns true if a given string is a valid height.
+     *
+     * @param test String value to test whether it is a valid height.
+     * @return True if input is a valid height, false otherwise.
      */
     public static boolean isValidHeight(String test) {
         return test.matches(VALIDATION_REGEX) && Float.valueOf(test) <= HEIGHT_MAX_VALUE;
@@ -37,7 +42,6 @@ public class Height extends Attribute<Float> {
      * Returns true if specified value is within heightRange.
      *
      * @param heightRange Range of height to check against.
-     *
      * @return True if value is falls within heightRange, false otherwise.
      */
     @Override
@@ -81,6 +85,8 @@ public class Height extends Attribute<Float> {
     /**
      * Adds a heading for the height field.
      * Empty height values (i.e. 0f) will be formatted as "N/A" for better clarity.
+     *
+     * @return A formatted height with headers and units for the height value.
      */
     public String getFormattedHeight() {
         if (this.isZero()) {
@@ -113,6 +119,8 @@ public class Height extends Attribute<Float> {
 
     /**
      * Checks if the value is valid (i.e. greater than 0).
+     *
+     * @return True if this instance of height has a value more than 0.
      */
     public boolean isValid() {
         return this.getValue() > 0f;

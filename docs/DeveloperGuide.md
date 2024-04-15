@@ -52,8 +52,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**<a name="main-components-of-the-architecture"></a>
 
 **`Main`** (consisting of
-classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is
+classes [`Main`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is
 in charge of the app launch and shut down.
 
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
@@ -93,20 +93,27 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified
-in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+in [`Ui.java`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts
-e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`,
-inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the
-visible GUI.
+The UI consists of a `MainWindow` that is made up of parts:
+
+* `CommandBox`
+* `ResultDisplay`
+* `PersonListPanel`
+* `PersonDetailsPanel`
+* `StatusBarFooter`
+
+There is also a `HelpWindow` that is not always displayed and is not part of the `MainWindow`.
+
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
-the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+the [`MainWindow`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified
-in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+in [`MainWindow.fxml`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -117,7 +124,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -157,7 +164,7 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -182,7 +189,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -264,13 +271,13 @@ For more details on how the `note` field interacts with the `add` and `edit` com
 
 ##### Interacting with the `note` command
 
-The sequence diagram below shows how the components interact with each other when the user inputs the command `note 1 nt/Likes to eat`.
+The sequence diagram below shows how the components interact with each other when the user inputs the command `note 1 Likes to eat`.
 
 ![AddNoteSequenceDiagram](images/AddNoteSequenceDiagram.png)
 
 The diagram highlights the four main components of FitBook, highlighted in their respective colors. For more information regarding the four main components, see [Main components of the architecture](#main-components-of-the-architecture).
 
-> The above sequence diagram also applies to the removal of a note from an existing client when no input string or prefix is entered for the `note` command. (i.e. `note 1`, or `note 1 nt/`).
+> The above sequence diagram also applies to the removal of a note from an existing client when no input string or prefix is entered for the `note` command. (i.e. `note 1`).
 
 #### Weight tracking feature
 The weight tracking feature allows users to keep track of past weight measurements of a client. You may refer to the [parameter constraints](#parameter-constraints) for more information.
@@ -515,13 +522,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -553,13 +553,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a ...                                      | I want to ...                                                                                | So that I can ...                                                                            |
 |----------|-----------------------------------------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| `* * *`  | user                                          | add a client name and phone number                                                           | quickly take down contact details even in a rush                                             |
+| `* * *`  | user                                          | add a client using only a name and phone number                                              | quickly take down contact details even in a rush                                             |
 | `* * *`  | user                                          | add personal health information for each contact                                             | store additional information associated with the client                                      |
-| `* * *`  | user                                          | delete contact                                                                               | remove them when I no longer need to contact them                                            |
+| `* * *`  | user                                          | delete contacts                                                                              | remove them when I no longer need to contact them                                            |
 | `* * *`  | user                                          | display all contacts                                                                         | I can see all my clients at a glance.                                                        |
 | `* * *`  | user                                          | see usage instructions                                                                       | refer to instructions when I forget how to use the application                               |
-| `* * *`  | user with many contacts in the address book   | search for contacts by their name                                                            | locate details of persons without having to go through the entire list                       |
-| `* *`    | user                                          | add a picture to my contacts                                                                 | easily identify my contacts and add a personal touch to them                                 |
+| `* * *`  | user with many clients in the address book    | search for clients by their name                                                             | locate details of persons without having to go through the entire list                       |
+| `* *`    | user with many clients in the address book    | search for clients by their note details                                                     | easily identify a specific client that has an important remark tied to him/her               |
+| `* *`    | user with many clients in the address book    | search for clients' height and weight given a specified range                                | easily filter down the list of clients who might require more attention                      |
+| `* *`    | user                                          | add/modify/delete exercise(s) that can be tailored to a client's fitness level               | easily cater to the fitness level of a client                                                |
 | `* *`    | user                                          | hide private contact details                                                                 | minimize chance of someone else seeing them by accident                                      |
 | `* *`    | user                                          | quickly view the available commands                                                          | view quick command help without needing to leave the application                             |
 | `* *`    | user                                          | scan a QR code to save a contact                                                             | transfer information from FitBook to my mobile phone easily                                  |
@@ -579,23 +581,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to view list
-1. FitBook shows a list of clients
-1. User requests to delete a specific client in the list
-1. FitBook deletes the client from the list
-1. Use case ends
+1. User requests to view list.
+1. FitBook shows a list of clients.
+1. User requests to delete a specific client in the list.
+1. FitBook deletes the client from the list.
+1. Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-
-  Use case ends.
+    * Use case ends.
 
 * 3a. The given index is invalid.
-
     * 3a1. FitBook shows an error message.
-
-      Use case resumes at step 2
+    * Use case resumes at step 2.
 
 <hr>
 
@@ -607,10 +606,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to view usage instructions
-1. FitBook displays the usage instructions such as how to add, edit, delete or search for clients
-1. User reads the instructions to understand how to use the FitBook
-1. Use case ends
+1. User requests to view usage instructions.
+1. FitBook displays the usage instructions such as how to add, edit, delete or search for clients.
+1. User reads the instructions to understand how to use the FitBook.
+1. Use case ends.
 
 <hr>
 
@@ -622,19 +621,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a new client
-1. FitBook displays a success message after the new client is successfully added
-1. Use case ends
+1. User requests to add a new client.
+1. FitBook displays a success message after the new client is successfully added.
+1. Use case ends.
 
 **Extensions**
 
-* 1a. User enters an invalid command
-    * 1a1. FitBook alerts the user that the command is invalid and displays the correct format
-    * Use case resumes
-* 1b. User tries to add a client that already exists in FitBook
-    * 1b1. FitBook alerts the user that a client with that name and details already exists
-    * 1b2. FitBook provides possible solutions (use different details if the client name is the same)
-    * Use case resumes
+* 1a. User enters an invalid command.
+    * 1a1. FitBook alerts the user that the command is invalid and displays the correct format.
+    * Use case resumes.
+* 1b. User tries to add a client that already exists in FitBook.
+    * 1b1. FitBook alerts the user that a client with that name and details already exists.
+    * Use case resumes.
 
 <hr>
 
@@ -646,16 +644,138 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to see a list of all clients
-1. FitBook displays a success message followed by the list of clients
-1. User views the list
-1. Use case ends
+1. User requests to see a list of all clients.
+1. FitBook displays a success message followed by the list of clients.
+1. User views the list.
+1. Use case ends.
 
 **Extensions**
 
-* 2a. User enters an invalid command
-    * 2b1. FitBook alerts the user that the command is invalid and displays the correct format
-    * Use case resumes
+* 2a. User enters an invalid command.
+    * 2a1. FitBook alerts the user that the command is invalid and displays the correct format.
+    * Use case resumes.
+
+<hr>
+
+**Use case**: UC05 - Add or overwrite exercise for a client
+
+**System**: FitBook
+
+**Actor**: User
+
+**MSS**
+
+1. User requests to add or overwrite an exercise for a specific client.
+2. FitBook updates the client's exercise information and displays a success message.
+3. Use case ends.
+
+**Extensions**
+
+* 1a. The specified index does not exist.
+    * 1a1. FitBook shows an error message.
+    * Use case ends.
+
+* 1b. The exercise information is incomplete or incorrect.
+    * 1b1. FitBook alerts the user about the incorrect format and displays the correct format.
+    * Use case resumes at step 1.
+
+* 2a. The specified exercise does not exist yet.
+  * 2a1.FitBook adds an exercise with the specified exercise values (sets, reps, and break time). Any exercise value not specified will be given a default value.
+  * Use case resumes.
+
+* 2b. The specified exercise already exists.
+  * 2b1. FitBook overwrites the exercise values of the exercise with the specified exercise values. Any exercise values not specified will remain the same.
+  * Use case resumes.
+
+<hr>
+
+**Use case**: UC06 - Delete Exercise for a Client
+
+**System**: FitBook
+
+**Actor**: User
+
+**MSS**
+
+1. User requests to delete an exercise from a specific client.
+2. FitBook deletes the specified exercise and displays a success message.
+3. Use case ends.
+
+**Extensions**
+
+* 1a. The specified index does not exist.
+    * 1a1. FitBook shows an error message.
+    * Use case ends.
+
+* 1b. The specified exercise does not exist.
+    * 1b1. FitBook alerts the user that the exercise is not found.
+    * Use case resumes at step 1.
+
+<hr>
+
+**System**: FitBook
+
+**Use case**: UC07 - Find clients
+
+**Actor**: User
+
+**MSS**
+
+1. User requests to find clients by filtering based on attributes.
+1. Fitbook displays a success message with the number of clients found, along with the filtered list of clients.
+1. Use case ends.
+
+**Extensions**
+* 1a. User does not specify any attribute to filter by.
+  * 1a1. Fitbook alerts the user that the command is invalid and displays the correct command format
+  * Step 1a1 is repeated until the user specifies an attribute to filter by.
+  * Use case resumes at step 2.
+
+* 1b. User specifies a filter that does not match any clients in Fitbook.
+  * 1b1. Fitbook displays a no client found message and displays an empty list of clients.
+  * Use case ends.
+
+* 1c. User specifies a parameter in an invalid format.
+  * 1c1. Fitbook alerts the user that the parameter format is invalid and displays the correct parameter format.
+  * Step 1c1 is repeated until the user specifies a correct parameter format.
+  * Use case resumes at step 2.
+
+  <hr>
+
+**System**: FitBook
+
+**Use case**: UC08 - Edit a client's details
+
+**Actor**: User
+
+**MSS**
+
+1. User requests to view list of all clients.
+1. FitBook shows a list of clients.
+1. User requests to edit the details of a specific client in the list.
+1. FitBook edits the details of a client in the list.
+1. FitBook displays a success message after the details of the client is successfully edited.
+1. Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+    * Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. FitBook shows an error message.
+    * Step 3a1 is repeated until the user gives a valid index.
+    * Use case resumes at step 4.
+
+* 3b. User uses an invalid command format.
+    * 3b1. FitBook alerts the user that the command format is invalid and displays the correct format.
+    * Step 3b1 is repeated until the user enters a valid command.
+    * Use case resumes at step 4.
+  
+* 3c. User tries to edit a client's name and phone number which ends up matching another client that already exists in FitBook.
+    * 3c1. FitBook alerts the user that a client with that name and details already exists.
+    * Step 3c1 is repeated until the user specifies a valid edit that will not result in a duplicate client.
+    * Use case resumes at step 4.
 
 <hr>
 
@@ -720,20 +840,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Glossary
 
+* **AB3**: [AddressBook-Level3](https://github.com/se-edu/addressbook-level3), a project created by the [SE-EDU initiative](https://se-education.org), upon which FitBook is built.
+* **API (Application Programming Interface)**: Defines how software components interact with each other
 * **Above average typing speed**: Typing speed of more than 40 words per minute
 * **Architecture**: The high-level design and code structure of FitBook
 * **Archive**: Moving a contact to a secondary space in FitBook that is of less importance
-* **API(Application Programming Interface)**: Defines how software components interact with each other
+* **CLI (Command Line Interface)**: A user interface that is based on interaction with the terminal or console
 * **Client**: A personal training customer of the target user (ie. people engaging the services of a Personal Trainer)
 * **Contact**: A person whose details are stored in FitBook
-* **CLI (Command Line Interface)**: A user interface that is based on interaction with the terminal or console
 * **Fit**: In good health, especially because of regular exercise
-* **Fitness**: The condition of being physically fit and healthy
 * **FitBook**: An address book with additional capabilities for managing personal training clients
+* **Fitness**: The condition of being physically fit and healthy
 * **GUI (Graphical User Interface)**: The visual interface of FitBook that users interact with
 * **Healthy**: In a good physical or mental condition
-* **JavaFX**: A set of graphics and media packages that enables developers to design, create, test and debug applications
 * **JSON (JavaScript Object Notation)**:  A lightweight data-interchange format used for storing and transporting data
+* **JavaFX**: A set of graphics and media packages that enables developers to design, create, test and debug applications
 * **Low-end devices**: Computers with lesser than average hardware resources such as processing power and memory
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Personal Health Information**: Details such as weight, body mass index, allergies, medical history etc.
@@ -742,10 +863,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Responsive performance**: No noticeable delay of FitBook during user interaction
 * **Sequence Diagram**: A UML diagram that depicts how objects interact with each other in a sequence
+* **UI (User Interface)**: Manages user interactions with graphic interface elements
 * **Usage instructions**: Documentation detailing FitBook's features and how to navigate about them
 * **User**: The person using FitBook
-* **UI (User Interface)**: Manages user interactions with graphic interface elements
-* **AB3**: [AddressBook-Level3](https://github.com/se-edu/addressbook-level3), a project created by the [SE-EDU initiative](https://se-education.org).
 * **vCard**: A data format for contact information. Detailed information can be found in [RFC 6350](https://datatracker.ietf.org/doc/html/rfc6350).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -775,8 +895,6 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a client
 
 1. Deleting a client while all clients are being shown
@@ -793,15 +911,20 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Open the data file at `data/addressbook.json`.
+   1. Delete a line containing the `"name"` attribute for a person.
 
-1. _{ more test cases …​ }_
+       Before: <img src="images/CorruptingDataBefore.png" height="100">
+
+       After: <img src="images/CorruptingDataAfter.png" height="80">
+
+   1. Open FitBook
+
+    Expected: FitBook starts with an empty address book. No clients are loaded.
 
 ## Parameter Constraints
 
@@ -814,13 +937,13 @@ testers are expected to do more *exploratory* testing.
 | **Note**           | Any text is allowed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | **Tag**            | Must only contains alphanumeric characters, with no spaces and cannot be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | **Weight (kg)**    | {::nomarkdown}<ul><li> Must be a positive number. ({:/}`w/0` will be treated as `w/`{::nomarkdown})</li><li> A reasonable maximum value of 5000 is allowed.</li><li> Although some decimal values of 5000 are allowed (e.g. 5000.000001), the weight values will still rounded off to the nearest 1 decimal place (i.e. 5000.0).</li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| **Height (cm)**    | {::nomarkdown}<ul><li> Must be a positive number. ({:/}`h/0` will be treated as `h/`{::nomarkdown})</li><li> A reasonable maximum value of 5000 is allowed.</li><li> Although some decimal values of 5000 are allowed (e.g. 5000.000001), the height values will still rounded off to the nearest 1 decimal place (i.e. 5000.0).</li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Height (cm)**    | {::nomarkdown}<ul><li> Must be a positive number. ({:/}`h/0` will be treated as `h/`{::nomarkdown})</li><li> A reasonable maximum value of 5000 is allowed.</li><li> Although some decimal values of 5000 are allowed (e.g. 5000.000001), the height values will still rounded off to the nearest 1 decimal place (i.e. 5000.0).</li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | **Index**          | Must be a positive number corresponding to the client in the list.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **Range**          | Format: `FROM, TO`{::nomarkdown}<ul><li>Note that the comma must follow immediately after <code>FROM</code>.</li><li>For example, to search for weights that fall between 70kg and 90kg, you can enter <code>w/70, 90</code>.</li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| **Exercise Name**  | Any non-empty text is allowed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| **Exercise Sets**  | {::nomarkdown}<ul><li> Must be a positive integer. </li> <li> A reasonable maximum value of 1000000 is allowed. </li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| **Exercise Reps**  | {::nomarkdown}<ul><li> Must be a positive integer. </li> <li> A reasonable maximum value of 1000000 is allowed. </li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| **Exercise Break** | {::nomarkdown}<ul><li> Must be a non-negative integer. </li> <li> A reasonable maximum value of 1000000 is allowed. </li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Exercise Name**  | Any non-empty text is allowed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **Exercise Sets**  | {::nomarkdown}<ul><li> Must be a positive integer. </li> <li> A reasonable maximum value of 1000000 is allowed. </li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **Exercise Reps**  | {::nomarkdown}<ul><li> Must be a positive integer. </li> <li> A reasonable maximum value of 1000000 is allowed. </li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **Exercise Break** | {::nomarkdown}<ul><li> Must be a non-negative integer. </li> <li> A reasonable maximum value of 1000000 is allowed. </li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 ## Appendix: Planned Enhancements
 
@@ -828,34 +951,48 @@ FitBook's team size is 5.
 
 1. **Allow for more flexible weight management**
 
-The current implementation of tracking clients' weights only allows users to add, modify or delete the latest weight value at the current date and time. We plan to make this feature more flexible by allowing users to add/modify a client's weight at a specified date and time of their choice.
+    The current implementation of tracking clients' weights only allows users to add, modify or delete the latest weight value at the current date and time. We plan to make this feature more flexible by allowing users to add/modify a client's weight at a specified date and time of their choice.
 
-2. **Provide more specific error messages**
+1. **Provide more specific error messages**
 
-When removing optional fields of a client, we should provide more detailed error messages. This is currently only available for the `weight` field, where removing a weight value from a client that has no weight value associated with them prompts the error message, `There are no more weight values to be removed. This client has no more weight values associated with them.`. We plan to provide more specific error messages when a client edits a field that has not changed / has nothing to remove, where the error message will be similar to the one seen in the `weight` field.
+    When removing optional fields of a client, we should provide more detailed error messages. This is currently only available for the `weight` field, where removing a weight value from a client that has no weight value associated with them prompts the error message, `There are no more weight values to be removed. This client has no more weight values associated with them.`. We plan to provide more specific error messages when a client edits a field that has not changed / has nothing to remove, where the error message will be similar to the one seen in the `weight` field.
 
-3. **Always display details of client being modified**
+1. **Always display details of client being modified**
 
-To improve clarity for users, the details pane should always show the information of the client that is being modified/had just been modified.
+    To improve clarity for users, the details pane should always show the information of the client that is being modified/had just been modified.
 
-> Some examples where this could be implemented:
->
-> * Modifying exercises using `fitadd` changes the tab back to weight, if there is a weight tab. It should show the exercises tab.
-> * Using `note 1 /edit` while client 2 is selected would edit client 1's note, but the details pane still shows client 2.
+    > Some examples where this could be implemented:
+    >
+    > * Modifying exercises using `fitadd` changes the tab back to weight, if there is a weight tab. It should show the exercises tab.
+    > * Using `note 1 /edit` while client 2 is selected would edit client 1's note, but the details pane still shows client 2.
 
-4. **Better keyboard navigation support**
+1. **Better keyboard navigation support**
 
-For advanced users, we can provide a better keyboard navigation experience by making the element being selected with `Tab` clearer. We also plan to remove unnecessary `Tab` presses between elements of interest. e.g. to get from the command input box to the client list requires 2 `Tab`s even though the user cannot interact with the result response box.
+    For advanced users, we can provide a better keyboard navigation experience by making the element being selected with `Tab` clearer. We also plan to remove unnecessary `Tab` presses between elements of interest. e.g. to get from the command input box to the client list requires 2 `Tab`s even though the user cannot interact with the result response box.
 
-5. **Adaptive client list entries**
+1. **Adaptive client list entries**
 
-The client list will always show the most important information at a glance. To reduce clutter, each entry of the client list will only show the following fields, each in a single line.
-  * Name
-  * Tags
-  * Phone Number
+    The client list will always show the most important information at a glance. To reduce clutter, each entry of the client list will only show the following fields, each in a single line.
+      * Name
+      * Tags
+      * Phone Number
 
-Fields that exceed the length of the line would be truncated. Complete information can always be viewed in the client details panel.
+    Fields that exceed the length of the line would be truncated. Complete information can always be viewed in the client details panel.
 
-6. **Restrict the number of weight entries per day to 1**
+1. **Restrict the number of weight entries per day to 1**
 
-Since a client's weight won't change much within a day, we can restrict the number of weight entries per day to 1. Having multiple weight entries within a day would also distort the weight-tracking graph.
+    Since a client's weight won't change much within a day, we can restrict the number of weight entries per day to 1. Having multiple weight entries within a day would also distort the weight-tracking graph.
+
+1. **Allow names containing non-alphanumeric characters**
+
+    Clients may have non-English names, or whose legal names contain non-alphanumeric characters. We should allow users to enter names that contain non-alphanumeric characters to make FitBook more inclusive.
+
+1. **Implement usage of escape characters to allow input of prefixes into certain fields**
+
+    Users might want to enter text in certain fields (e.g. `note`, `address`) that coincide with the prefixes for other attributes. For example, `add n/Tom p/123 a/LazyTown p/o box number 999` is currently not allowed as `p/` in `p/o` is treated as a prefix for phone number. Hence, we intend to implement the usage of escape characters to allow for such inputs.
+
+1. **Remove unnecessary prefixes in commands**
+
+    Some commands require the use of unnecessary prefixes which might slightly inconvenience the user.
+
+    For example, the `fitdelete` command currently has the format `fitdelete INDEX n/EXERCISE_NAME`. Removing the requirement of specifying the `n/` prefix will provide greater convenience to the user by requiring them to type less. Furthermore, it will address issues that come with specifying multiple `n/` prefixes.

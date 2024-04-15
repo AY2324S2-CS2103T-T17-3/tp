@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_CLIENTS_FOUND_OVERVIEW;
 import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_NO_CLIENTS_FOUND;
 import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_ONE_CLIENT_FOUND;
-import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_PERSONS_FOUND_OVERVIEW;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.ALICE_WITHOUT_EMAIL;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -92,7 +92,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_searchEmptyName_allPersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 7);
+        String expectedMessage = String.format(MESSAGE_CLIENTS_FOUND_OVERVIEW, 7);
 
         NameContainsSubstringPredicate namePredicate = new NameContainsSubstringPredicate("");
 
@@ -104,7 +104,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_searchEmptyPhone_allPersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 7);
+        String expectedMessage = String.format(MESSAGE_CLIENTS_FOUND_OVERVIEW, 7);
 
         PhoneContainsSubstringPredicate phonePredicate = new PhoneContainsSubstringPredicate("");
 
@@ -116,7 +116,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_searchEmptyEmail_somePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_CLIENTS_FOUND_OVERVIEW, 2);
 
         EmailContainsSubstringPredicate emailPredicate = new EmailContainsSubstringPredicate("");
         FindCommand command = new FindCommand(new CombinedPredicates(emailPredicate));
@@ -128,7 +128,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_searchEmptyAddress_somePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_CLIENTS_FOUND_OVERVIEW, 3);
 
         AddressContainsSubstringPredicate addressPredicate = new AddressContainsSubstringPredicate("");
         FindCommand command = new FindCommand(new CombinedPredicates(addressPredicate));
@@ -141,7 +141,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_searchEmptyTag_somePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_CLIENTS_FOUND_OVERVIEW, 2);
 
         TagSetContainsAllTagsPredicate tagsPredicate = new TagSetContainsAllTagsPredicate(new HashSet<>());
         FindCommand command = new FindCommand(new CombinedPredicates(tagsPredicate));
@@ -154,7 +154,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_searchEmptyNote_somePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_CLIENTS_FOUND_OVERVIEW, 2);
 
         NoteContainsSubstringPredicate notePredicate = new NoteContainsSubstringPredicate("");
         FindCommand command = new FindCommand(new CombinedPredicates(notePredicate));
@@ -167,7 +167,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_searchEmptyWeight_somePersonsFound() throws ParseException {
-        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_CLIENTS_FOUND_OVERVIEW, 2);
 
         WeightMapContainsWeightRangePredicate weightPredicate =
                 new WeightMapContainsWeightRangePredicate(ParserUtil.parseSearchRange(Optional.empty()));
@@ -199,7 +199,7 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(ALICE), this.model.getFilteredPersonList());
 
         // Multiple persons found
-        expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
+        expectedMessage = String.format(MESSAGE_CLIENTS_FOUND_OVERVIEW, 2);
         predicate = new NameContainsSubstringPredicate("meier");
         command = new FindCommand(new CombinedPredicates(predicate));
         this.expectedModel.updateFilteredPersonList(predicate);
@@ -228,7 +228,7 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(ALICE), this.model.getFilteredPersonList());
 
         // Multiple persons found
-        expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 3);
+        expectedMessage = String.format(MESSAGE_CLIENTS_FOUND_OVERVIEW, 3);
         predicate = new PhoneContainsSubstringPredicate("9482");
         command = new FindCommand(new CombinedPredicates(predicate));
         this.expectedModel.updateFilteredPersonList(predicate);
@@ -257,7 +257,7 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(BENSON), this.model.getFilteredPersonList());
 
         // Multiple persons found
-        expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 7);
+        expectedMessage = String.format(MESSAGE_CLIENTS_FOUND_OVERVIEW, 7);
         predicate = new EmailContainsSubstringPredicate("example.com");
         command = new FindCommand(new CombinedPredicates(predicate));
         this.expectedModel.updateFilteredPersonList(predicate);
@@ -287,7 +287,7 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(FIONA), this.model.getFilteredPersonList());
 
         // Multiple persons found
-        expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 3);
+        expectedMessage = String.format(MESSAGE_CLIENTS_FOUND_OVERVIEW, 3);
         predicate = new AddressContainsSubstringPredicate("street");
         command = new FindCommand(new CombinedPredicates(predicate));
         this.expectedModel.updateFilteredPersonList(predicate);
@@ -322,7 +322,7 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(BENSON), this.model.getFilteredPersonList());
 
         // Multiple persons found
-        expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 3);
+        expectedMessage = String.format(MESSAGE_CLIENTS_FOUND_OVERVIEW, 3);
 
         predicate = new TagSetContainsAllTagsPredicate(new HashSet<>(Arrays.asList(new Tag("friends"))));
 
@@ -363,7 +363,7 @@ public class FindCommandTest {
     @Test
     public void execute_searchCaseInsensitiveTag_personsFound() {
         // No persons found
-        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_CLIENTS_FOUND_OVERVIEW, 3);
 
         TagSetContainsAllTagsPredicate predicate = new TagSetContainsAllTagsPredicate(
                 new HashSet<>(Arrays.asList(new Tag("FrIenDs"))));
@@ -395,7 +395,7 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(FIONA), this.model.getFilteredPersonList());
 
         // Multiple persons found
-        expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
+        expectedMessage = String.format(MESSAGE_CLIENTS_FOUND_OVERVIEW, 2);
         predicate = new NoteContainsSubstringPredicate("best");
         command = new FindCommand(new CombinedPredicates(predicate));
         this.expectedModel.updateFilteredPersonList(predicate);
@@ -465,7 +465,7 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(ALICE), this.model.getFilteredPersonList());
 
         // Multiple persons found
-        expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
+        expectedMessage = String.format(MESSAGE_CLIENTS_FOUND_OVERVIEW, 2);
 
         TagSetContainsAllTagsPredicate tagsPredicate = new TagSetContainsAllTagsPredicate(
                 new HashSet<>(Arrays.asList(new Tag("friends"))));

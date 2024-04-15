@@ -42,8 +42,7 @@ class JsonAdaptedWeight {
      * Converts this Jackson-friendly adapted date-weight key-value pair into the model's
      * {@code Entry<LocalDateTime, Weight>} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in
-     *                               the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public WeightEntry toModelType() throws IllegalValueException {
         try {

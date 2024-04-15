@@ -8,10 +8,16 @@ title: FitBook
 
 ![Ui](images/Ui.png)
 
-**FitBook is a desktop application for managing your clients' details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+FitBook is a desktop application built for personal trainers to:
 
-* If you are interested in using FitBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing FitBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* **Manage clients' contact details.**
+* **Monitor clients' progress.**
+* **Curate personalised workout plans for each client.** 
+
+While it has a Graphical User Interface (GUI), most user interactions happen through a Command Line Interface (CLI).
+
+* If you are interested in _using_ FitBook, head over to the [**Quick Start**](UserGuide.html#quick-start) section of the [**User Guide**](UserGuide.html).
+* If you are interested in _contributing_ to FitBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**

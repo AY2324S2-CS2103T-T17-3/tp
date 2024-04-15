@@ -51,6 +51,15 @@ public class Person {
 
     /**
      * Every field must be present and not null.
+     * @param name The name of the person to be created.
+     * @param phone The phone number of the person to be created.
+     * @param email The email of the person to be created.
+     * @param address The address of the person to be created.
+     * @param weights The weight value of the person to be created.
+     * @param height The height value of the person to be created.
+     * @param note Any note associated with the person to be created.
+     * @param tags Any tags associated with the person to be created.
+     * @param exerciseSet The exercise(s) of the person to be created.
      */
     public Person(Name name, Phone phone, Email email, Address address, NavigableMap<LocalDateTime, Weight> weights,
             Height height, Note note, Set<Tag> tags, ExerciseSet exerciseSet) {
@@ -124,6 +133,8 @@ public class Person {
      * Returns an immutable navigable map, which throws
      * {@code UnsupportedOperationException}
      * if modification is attempted.
+     *
+     * @return A {@code NavigableMap} containing the date and weight key-value entries.
      */
     public NavigableMap<LocalDateTime, Weight> getWeights() {
         return this.weights.getValue();
@@ -251,6 +262,8 @@ public class Person {
     /**
      * Generates a formatted message for the Person.
      * Only fields with values are included.
+     *
+     * @return A formatting message containing the details of this instance of Person.
      */
     public String getFormattedMessage() {
         StringBuilder sb = new StringBuilder();

@@ -79,6 +79,9 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Initializes the MainWindow instance with the provided primary stage and logic.
+     *
+     * @param primaryStage The Stage to initialize.
+     * @param logic The logic to initialize.
      */
     public static void init(Stage primaryStage, Logic logic) {
         if (instance == null) {
@@ -89,6 +92,8 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Returns the singleton instance of the MainWindow class.
+     *
+     * @return The singleton instance of the MainWindow class.
      */
     public static MainWindow getInstance() {
         assert instance != null : "MainWindow must be initialized before getting instance.";
@@ -265,6 +270,8 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the text of the command box.
+     *
+     * @param text The text to be filled in the commandBox.
      */
     public void setCommandBoxText(String text) {
         this.commandBox.setText(text);

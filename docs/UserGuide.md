@@ -12,7 +12,8 @@ With FitBook, you can:
 
 * **Seamlessly save clients as contacts on your phone using QR codes**
 * **Store personalized notes for each client**
-* **Keep track of your clients' weight**
+* **Keep track and visualize your clients' weights**
+* **Curate personalised workout plans for each client**
 
 _All in one app!_
 
@@ -81,14 +82,17 @@ Java is a versatile programming language used for developing various application
     * If that doesn't work, try the steps found [here](#why-doesnt-fitbook-start-when-i-double-click).
 
 
-1. A GUI similar to the one depicted below should appear in a few seconds. The app contains some sample data for you to familiarize yourself with the UI.<br>
+1. A GUI similar to the one depicted below should appear in a few seconds. The app contains some sample data for you to familiarize yourself with the UI.
 
-    ![Ui](images/UGUI.png)
+    <figure style="text-align: center;">
+        <img src="images/UGUI.png">
+        <figcaption><i>FitBook Graphical User Interface</i></figcaption>
+    </figure>
 
 1. Read through `help`, type any command listed into the input box and press `enter` <br>
    These are some example commands you can try!
 
-   * `add n/John p/98765432` Adds a client named
+   * `add n/John p/98765432` : Adds a client named
    `John Doe` with the number `98765432` to FitBook.
 
    * `clear` : Clears all clients from the list.
@@ -118,7 +122,7 @@ Java is a versatile programming language used for developing various application
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
+* Parameters can be in any order (unless otherwise specified).<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -130,10 +134,18 @@ Java is a versatile programming language used for developing various application
 ### Viewing help : `help`
 
 Launches the help menu depicted below. <br>
-Clicking `Open User Guide` leads to the User Guide website.
+Clicking `Open User Guide` will open the User Guide website on your default browser.
 
-![help message](images/helpMessage.png)
+<figure style="text-align: center;">
+    <img src="images/helpMessage.png">
+    <figcaption><i>Help Window</i></figcaption>
+</figure>
+
 Format: `help`
+
+> Due to a limitation on Linux machines, the `Open User Guide` functionality is not working. Therefore, linux users will be greeted with a `Copy URL` button instead.
+>
+> ![linux-copy-url-message](images/helpMessageLinux.png)
 
 <hr>
 
@@ -177,10 +189,9 @@ Edits information tagged to an existing client.
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​`
 
 * Edits the clients at the specified `INDEX`. The index refers to the index number shown in the displayed client list.
-* The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* Refer to the list of valid parameters of each input for more details.
+* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
 * When no value is specified after a prefix, the value of that prefix will be removed from the client. (e.g. `edit 1 nt/` removes the note from the client at index 1).
     * Since WEIGHT can store multiple historical values, specifying an empty weight prefix removes the latest weight value from the client. Otherwise, the latest weight value will be replaced by the specified weight in this command.
 * HEIGHT and WEIGHT only take in one value each. For example, the following commands are invalid
@@ -192,24 +203,26 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGH
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
 
+<div markdown="block" class="alert alert-warning">:warning: **Note:**
+FitBook does not allow any edits that might result in [duplicate clients](#duplicate-clients).
+</div>
+
+
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` - Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` - Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 <hr>
 
 ### Adding a note to a client : `note`
 
 Format: `note INDEX [NOTE] `
 
-* Edits the note of the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the note of the client specified by `INDEX`. The index refers to the index number shown in the displayed client list.
+* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
 * Existing note will be updated to the note specified.
 * If no note is given, the note for the client at the specified index will be deleted.
 
 > While this can also be done using the `edit` command, this `note` command serves as a faster way for users to directly modify a note.
-
-<div markdown="block" class="alert alert-warning">:warning: **Note:**
-FitBook does not allow any edits that might result in [duplicate clients](#duplicate-clients).
-</div>
 
 Examples:
 
@@ -218,23 +231,29 @@ Examples:
 
 If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), `/edit` will be replaced with the existing note after pressing the `Enter` key. This provides greater convenience to the user when editing an existing note.
 
-> For example: Client at index 1 has the note "Wants to gain muscle".
+Format: `note INDEX /edit`
+
+> **For example:**
+> Assume client at index `1` has the note "Wants to gain muscle".
 >
-> Executing the command `note 1 /edit` will replace the contents of the command box with `note 1 Wants to gain muscle`.
+> * `note 1 /edit` - Replaces the contents of the command box with `note 1 Wants to gain muscle`.
 <hr>
 
 ### Adding or overwriting exercise(s) of clients : `fitadd`
 
 Format: `fitadd INDEX n/EXERCISE_NAME [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS]`
 
-* Adds the specified exercise to the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Adds the specified exercise to the client specified by `INDEX`. The index refers to the index number shown in the displayed client list.
 * `EXERCISE_NAME` is **case-insensitive**.
+* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
 * Overwrites the specified exercise and its values if the exercise already exists for the client.
 * An exercise is deemed to already exist if the case-insensitive user-supplied exercise name completely matches an existing exercise name of the client.
 
 Alternatively, you can use **one or more** of the supported prefixes to quickly add a predefined set of related exercises to the specified client.
 
 Format: `fitadd INDEX [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all]`
+
+* At least one or more of the default supported prefixes must be supplied.
 
 | Prefix     | Exercises                                                                                                                                             |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -252,44 +271,106 @@ You must either specify an exercise name, or use one or more of the default supp
 </div>
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
+<a id="fitadd-overwrite-warning"></a>
 
 If you are adding an exercise that already exists for the client, the exercise will be overwritten with the newly supplied
-exercise value(s), or a default set of exercise values (ie. `sets`: 1, `reps`: 1, `break`: 0) for the exercise value(s) that are not supplied.
+exercise value(s). Exercise values that are not specified will remain unchanged.
+
+> **For example:**
+>
+> Assume the following exercise already exists in the client at index `1`.
+>
+> ![fitadd-overwrite-prerequisite](images/FitaddOverwritePrerequisite.png)
+>
+> * `fitadd 1 n/squats`
+>   * Does nothing (All values unchanged).
+> ![fitadd-overwrite-prerequisite](images/FitaddOverwritePrerequisite.png)
+> * `fitadd 1 n/squats s/1`
+>   * `Sets` updated to `1`.
+>   * `Reps` remains unchanged at `15` .
+>   * `Break between sets` remains unchanged at `90 seconds`.
+> ![fitadd-overwrite-sets](images/FitaddOverwriteSets.png)
+> * `fitadd 1 n/squats r/10 b/60`
+>   * `Sets` remains changed at `10`.
+>   * `Reps` updated to `10`.
+>   * `Break between sets` updated to `60 seconds`.
+> ![fitadd-overwrite-reps-break](images/FitaddOverwriteRepsBreak.png)
 </div>
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
+<a id="fitadd-prefix-warning"></a>
 
 Using the default supported prefixes will overwrite exercises with the predefined set of values, if any of those predefined
 default exercises already exists for the client.
 
-For example, if client with `INDEX` 1 already has an exercise named `push-ups` with `sets`: 20, `reps`: 5 and `break`: 60,
-entering the command `fitadd 1 /arms`, will overwrite the `push-ups` exercise values to `sets`: 3, `reps`: 15 and `break`: 90.
-
-As per the default exercises table above.
+> **For example:**
+>
+> Assume the following exercises already exists in the client at index `1`
+>
+> ![fitadd-push-ups](images/FitaddPushups.png)
+>
+> * `fitadd 1 /arms`
+>   * `bicep curls` added with default values.
+>   * `push-ups` updated to `Sets`: 3, `Reps`: 15, `Break between sets`: 90.
+>   * `tricep dips` added with default values.
+> ![fitadd-arms](images/FitaddArms.png)
 </div>
 
 Examples:
 
-* `fitadd 1 n/burpees` - Adds or overwrites the `burpees` exercise of the 1st client with a default set of 1, default repetition of 1 and default 0 seconds break time between sets.
-* `fitadd 1 n/burpees r/5` - Adds or overwrites the `burpees` exercise of the 1st client with a default set of 1, repetitions of 5 and default 0 seconds break time between sets.
-* `fitadd 1 n/burpees s/3 r/5 b/30` - Adds or overwrites the `burpees` exercise of the 1st client with sets of 3, repetitions of 5 and 30 seconds break time between sets.
-* `fitadd 2 /arms` - Adds or overwrites a default set of exercises from the `arms` category to the 2nd client.
-* `fitadd 2 /arms /legs` - Adds or overwrites a default set of exercises from the `arms` and `legs` category to the 2nd client.
+* `fitadd 1 n/burpees` - Adds `burpees` exercise to the client at index `1` with the following values:
+  * `Sets`: 1 (default value).
+  * `Reps`: 1 (default value).
+  * `Break between sets`: 0 seconds (default value).
+
+* `fitadd 1 n/burpees r/5` - Adds `burpees` exercise to the client at index `1` with the following values:
+  * `Sets`: 1 (default value).
+  * `Reps`: 5 (specified value).
+  * `Break between sets`: 0 seconds (default value).
+
+* `fitadd 1 n/burpees s/3 r/5 b/30` - Adds `burpees` exercise to the client at index `1` with the following values:
+  * `Sets`: 3 (specified value).
+  * `Reps`: 5 (specified value).
+  * `Break between sets`: 30 seconds (specified value).
+
+<div markdown="block" class="alert alert-warning">:warning: **Warning**
+If `burpees` already exists for the 3 examples above, , please refer to this [warning](#fitadd-overwrite-warning) for the behaviour of the commands.
+</div>
+
+* `fitadd 2 /arms` - Adds a default set of exercises from the `arms` category to the client at index `2`.
+
+* `fitadd 2 /arms /legs` - Adds a default set of exercises from the `arms` and `legs` category to the client at index `2`.
+
+<div markdown="block" class="alert alert-warning">:warning: **Warning**
+If any of the exercises within the `arms` or `legs` category already exists for the above 2 commands, please refer to this [warning](#fitadd-prefix-warning) for the behaviour of this command.
+</div>
+
+
 <hr>
 
 ### Deleting exercise(s) of clients : `fitdelete`
 
 Format: `fitdelete INDEX n/EXERCISE_NAME`
 
-* Deletes the specified exercise from the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the specified exercise from the client specified by `INDEX`. The index refers to the index number shown in the displayed client list.
 * `EXERCISE_NAME` is **case-insensitive**.
-* If the `n/` prefix is supplied more than once, only the last one will be used. For example `fitdelete 1 n/exercise-1 n/exercise-2` will attempt to delete the exercise with name `exericse-2` from the 1st client
+* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
+
+
+<div markdown="block" class="alert alert-warning">:warning: **Warning**
+
+If multiple `n/` prefixes are specified, only the last value will be deleted. All previous values will be ignored.
+
+> **For example:**
+> * `fitdelete 1 n/burpees n/squats` - Deletes `squats` from the client at index `1`. `burpees` (if exists) will remain unchanged.
+</div>
+
 
 Alternatively, you can use the `/all` prefix to delete all exercises from the specified client.
 
 Format: `fitdelete INDEX /all`
 
-* Supplying the `/all` prefix more than once will be treated as if it was only supplied once.
+* Supplying the `/all` prefix more than once will result in an invalid command.
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
@@ -298,27 +379,27 @@ You must either specify an exercise name or the `/all` prefix, but not both toge
 
 Examples:
 
-* `fitdelete 1 n/burpees` - Deletes the exercise with name `burpees` from the 1st client.
-* `fitdelete 2 /all` - Deletes all exercise(s) from the 2nd client.
+* `fitdelete 1 n/burpees` - Deletes the exercise with name `burpees` from the client at index `1`.
+* `fitdelete 2 /all` - Deletes all exercise(s) from the client at index `2`.
 <hr>
 
 ### Adding or removing weight of a client : `weight`
 
 Format: `weight INDEX [WEIGHT] `
 
-* Adds a weight value to a client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Adds a weight value (kg) to a client specified by `INDEX`. The index refers to the index number shown in the displayed client list.
+* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
 * Weight values specified in this command will be added as a new weight value to the specified client. To edit the latest weight of the client, use the [`edit`](#editing-a-client--edit) command.
 * If more than one value is entered, only the first value will be parsed. Extraneous parameters after the first value will be ignored.
   * For example, `weight 1 85 95` only adds the weight value of `85` to the first client in the list. The value of `95` will be ignored.
 * If no weight value is given, or the weight value entered is 0, the latest weight for the client at the specified index will be deleted.
-* Refer to the list of valid parameters of each input for more details.
 
 > While the `edit` command allows one to **edit** a client's latest weight value, this `weight` command serves as a way for users to **add** a client's weight.
 
 Examples:
 
-* `weight 1 90` - Adds a new weight value of 90 to the client at index 1.
-* `weight 2` - Deletes the latest weight value of the client at index 2.
+* `weight 1 90` - Adds a new weight value of 90 to the client at index `1`.
+* `weight 2` - Deletes the latest weight value of the client at index `2`.
 
 <hr>
 
@@ -334,7 +415,7 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/N
 * When an empty input is specified for an optional field, only users that have value(s) available for that field will be shown. (e.g. `find w/` returns all clients that have at least one weight value associated with them).
 * Multiple fields can be searched in one command.
     * All fields must match (e.g `find n/Wendy p/91234567` will match with a client whose name **contains** `wendy` and phone number **contains** `91234567`)
-* All fields except `TAG` will be matched based on substring (e.g `Wen` will match `Wendy`)
+* All fields except `TAG`, `WEIGHT` AND `HEIGHT` will be matched based on substring (e.g `Wen` will match `Wendy`)
 
 <div markdown="block" class="alert alert-warning">:warning: **Take note:**
 * Unlike other fields, `TAG` must be an exact match (case-insensitive)
@@ -349,13 +430,13 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/N
 * If no prefix is specified to search for a client's name, it must be the first field to search.
     * e.g. `find t/friends roy` will result in an error.
 * If name prefix is specified it will take precedence over the non-prefixed argument.
-    * e.g. `find roys n/roy` will use n/roy to search for a client's name instead of roys.
+    * e.g. `find roys n/roy` will use `n/roy` to search for a client's name instead of `roys`.
 </div>
 
 
 Examples:
-* `find n/Wendy` returns `Wendy Son` and `Wendy Kim`
-* `find n/Wendy t/Lover` returns `Wendy` (`Name` contains `Wendy` and is tagged with `Lover`)
+* `find n/Wendy` - Finds all clients whose names contain `Wendy`
+* `find n/Wendy t/Lover` - Finds all clients whose names contain `Wendy` and are tagged with `Lover`
 
 <hr>
 
@@ -365,15 +446,14 @@ Deletes the specified client from FitBook.
 
 Format: `delete INDEX`
 
-* Deletes the client at the specified `INDEX`.
-* The index refers to the index number shown in the displayed client list.
-* The index **must be a single positive integer** (e.g. 1, 2, 3…​).
+* Deletes the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list.
+* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
 * Anything after `delete` is treated as the index.
 * The index cannot be followed by any text (`delete 1 2` will be regarded as an invalid index).
 
 Examples:
-* `list` followed by `delete 2` deletes the second client in the list.
-* `find Betsy` followed by `delete 1` deletes the first client in the results of the `find` command.
+* `list` followed by `delete 2` - Deletes the second client in the list.
+* `find Betsy` followed by `delete 1`- Deletes the first client in the results of the `find` command (i.e Deletes the first client whose name contains `Betsy`).
 
 <hr>
 
@@ -419,7 +499,11 @@ Furthermore, certain edits can cause FitBook to behave in unexpected ways (e.g. 
 
 ### Save contact to phone
 
-![QrCodeContactCard](images/QrCodeContactCard.png)
+<figure style="text-align: center;">
+    <img src="images/QrCodeContactCard.png">
+    <figcaption><i>QR Code Contact Card</i></figcaption>
+</figure>
+
 
 To save a contact to your mobile phone from FitBook, simply scan the QR code next to the contact using your phone's default camera app!
 
@@ -431,8 +515,14 @@ Due to the limited availability of mobile devices for testing, this feature has 
 While most modern smartphones are able to scan QR codes with the default camera app, we are unable to provide any guarantee that it will work with all smartphones.
 </div>
 
-<img src="images/QRScanning.png" height="480">
-<img src="images/QRContact.png" height="480">
+<figure style="text-align: center;">
+    <div>
+        <img src="images/QRScanning.png" height="480">
+        <img src="images/QRContact.png" height="480">
+    </div>
+    <figcaption><i>QR Code Demo</i></figcaption>
+</figure>
+
 
 <hr>
 
@@ -481,18 +571,18 @@ While most modern smartphones are able to scan QR codes with the default camera 
 
 | Command                                                           | Format, Examples                                                                                                                                                                                                                       |
 |-------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**add**](#adding-a-client--add)                                  | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTE] [h/HEIGHT] [w/WEIGHT] [t/TAG]…​` <br><br>e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 nt/likes pizzas w/70 h/170 t/friend t/colleague` |
+| [**add**](#adding-a-client--add)                                  | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTE] [h/HEIGHT] [w/WEIGHT] [t/TAG]…​` <br><br>Example: <br><li>`add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 nt/likes pizzas w/70 h/170 t/friend t/colleague`</li> |
 | [**clear**](#clearing-all-entries--clear)                         | `clear`                                                                                                                                                                                                                                |
-| [**delete**](#deleting-a-client--delete)                          | `delete INDEX`<br><br>e.g. `delete 3`                                                                                                                                                                                                  |
-| [**edit**](#editing-a-client--edit)                               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [h/HEIGHT] [w/WEIGHT] [t/TAG]…​`<br><br>e.g. `edit 2 n/James Lee e/jameslee@example.com`                                                                         |
+| [**delete**](#deleting-a-client--delete)                          | `delete INDEX`<br><br>Example: <br><li> `delete 3` </li>                                                                                                                                                                                                  |
+| [**edit**](#editing-a-client--edit)                               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [h/HEIGHT] [w/WEIGHT] [t/TAG]…​`<br><br>Example: <br> <li> `edit 2 n/James Lee e/jameslee@example.com` </li>                                                                         |
 | [**exit**](#exiting-the-program--exit)                            | `exit`                                                                                                                                                                                                                                 |
-| [**find**](#finding-clients--find)                                | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​ [h/RANGE] [w/RANGE]`<br><br>e.g. `find n/Alex w/40,80 nt/Wants to build muscle t/family`                                                                     |
-| [**fitadd**](#adding-or-overwriting-exercises-of-clients--fitadd) | `fitadd INDEX [n/EXERCISE_NAME] [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS] [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all] `<br><br>e.g. `fitadd 1 n/burpees s/3 r/5 b/30`<br>`fitadd 1 /arms /abs`               |
-| [**fitdelete**](#deleting-exercises-of-clients--fitdelete)        | `fitdelete INDEX [n/EXERCISE_NAME] [/all]`<br><br>e.g. `fitdelete 1 n/burpees`<br>`fitdelete 1 /all`                                                                                                                                   |
+| [**find**](#finding-clients--find)                                | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​ [h/RANGE] [w/RANGE]`<br><br>Example: <br> <li> `find n/Alex w/40,80 nt/Wants to build muscle t/family` </li>                                                                     |
+| [**fitadd**](#adding-or-overwriting-exercises-of-clients--fitadd) | `fitadd INDEX n/EXERCISE_NAME [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS]`<br><br>Example: <br> <li> `fitadd 1 n/burpees s/3 r/5 b/30`</li><br><br>`fitadd INDEX [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all]`<br><br>Example: <br><li>`fitadd 1 /arms /abs`</li>               |
+| [**fitdelete**](#deleting-exercises-of-clients--fitdelete)        | `fitdelete INDEX n/EXERCISE_NAME`<br><br>Example: <br> <li> `fitdelete 1 n/burpees`</li><br><br> `fitdelete INDEX /all` <br><br> Example: <br><li>`fitdelete 1 /all` </li>                                                                                                                                   |
 | [**list**](#listing-all-clients--list)                            | `list`                                                                                                                                                                                                                                 |
 | [**help**](#viewing-help--help)                                   | `help`                                                                                                                                                                                                                                 |
-| [**note**](#adding-a-note-to-a-client--note)                      | `note INDEX [NOTE] [/edit]`<br><br>e.g. `note 2 Sprained right ankle in the past`<br>`note 1 /edit`                                                                                                                                    |
-| [**weight**](#adding-or-removing-weight-of-a-client--weight)      | `weight INDEX [WEIGHT]`<br><br> e.g. `weight 3 70`                                                                                                                                                                                     |
+| [**note**](#adding-a-note-to-a-client--note)                      | `note INDEX [NOTE]` <br><br> Example: <br><li> `note 2 Sprained right ankle in the past`</li> <br><br>`note INDEX /edit`<br><br>Example: <br> <li>`note 1 /edit`</li>                                                                                                                                    |
+| [**weight**](#adding-or-removing-weight-of-a-client--weight)      | `weight INDEX [WEIGHT]`<br><br> Example: <br> <li> `weight 3 70`</li>                                                                                                                                                                                   |
 
 ## Parameter Constraints
 
@@ -505,7 +595,7 @@ While most modern smartphones are able to scan QR codes with the default camera 
 | **Note**           | Any text is allowed except for prefixes preceded by at least one whitespace that is associated with this command. For example, `add n/Tom p/123 nt/His p/o box is 990` is not allowed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ||
 | **Tag**            | Must only contains alphanumeric characters, with no spaces and cannot be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | **Weight (kg)**    | {::nomarkdown}<ul><li> Must be a positive number. ({:/}`w/0` will be treated as `w/`{::nomarkdown})</li><li> A reasonable maximum value of 5000 is allowed.</li><li> Although some decimal values of 5000 are allowed (e.g. 5000.000001), the weight values will still rounded off to the nearest 1 decimal place (i.e. 5000.0).</li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| **Height (cm)**    | {::nomarkdown}<ul><li> Must be a positive number. ({:/}`h/0` will be treated as `h/`{::nomarkdown})</li><li> A reasonable maximum value of 5000 is allowed.</li><li> Although some decimal values of 5000 are allowed (e.g. 5000.000001), the height values will still rounded off to the nearest 1 decimal place (i.e. 5000.0).</li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Height (cm)**    | {::nomarkdown}<ul><li> Must be a positive number. ({:/}`h/0` will be treated as `h/`{::nomarkdown})</li><li> A reasonable maximum value of 5000 is allowed.</li><li> Although some decimal values of 5000 are allowed (e.g. 5000.000001), the height values will still rounded off to the nearest 1 decimal place (i.e. 5000.0).</li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | **Index**          | Must be a positive number corresponding to the client in the list.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **Range**          | Format: `FROM, TO`{::nomarkdown}<ul><li>Note that the comma must follow immediately after <code>FROM</code>.</li><li>For example, to search for weights that fall between 70kg and 90kg, you can enter <code>w/70, 90</code>.</li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | **Exercise Name**  | Any non-empty text is allowed except for prefixes preceded by at least one whitespace that is associated with this command. For example, `fitadd 1 n/Climbing stairs at Raj s/o Sri's house s/10 r/10` is not allowed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ||                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
