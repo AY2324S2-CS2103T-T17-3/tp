@@ -2,6 +2,7 @@
 layout: page
 title: Developer Guide
 ---
+## Table of contents
 
 * Table of Contents
 {:toc}
@@ -27,6 +28,8 @@ title: Developer Guide
 | Codeium | Dillon          | {::nomarkdown}<ul><li>JavaDocs</li><li>Full-line autocomplete</li></ul>{:/} |
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Setting up, getting started**
 
@@ -90,6 +93,8 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified
@@ -130,6 +135,8 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
+<div style="page-break-after: always;"></div>
+
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API
 call as an example.
 
@@ -149,6 +156,8 @@ How the `Logic` component works:
    several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
@@ -161,6 +170,8 @@ How the parsing works:
   a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g., during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 
@@ -180,6 +191,8 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
@@ -192,6 +205,8 @@ The `Model` component,
 **API** : [`Storage.java`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
+
+<div style="page-break-after: always;"></div>
 
 The `Storage` component,
 
@@ -237,6 +252,8 @@ The following sequence diagram illustrates this.
 
 ![QrAddPersonSequenceDiagram](images/QrAddPersonSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 We considered generating the QR code upon the creation of a `Person` object. However, we discovered that it was possible for a `Person` to be created, but never added to the address book, as shown in the following activity diagram.
 
 ![AddCommandActivityDiagram](images/AddCommandActivityDiagram.png)
@@ -250,6 +267,8 @@ This approach was also taken for the editing/deleting of QR codes.
 QR codes associated with a client are saved in the `data/qrcodes` folder as `.png` files, and named according to the following format:
 
 * [HASHCODE].png, where [HASHCODE] is the result of the `hashCode()` function of a `Person`.
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a client from FitBook
 
@@ -345,6 +364,8 @@ The following activity diagram summarizes what happens when a client is added or
 
 ![AddAndEditCommandSequenceDiagram](images/AddAndEditCommandActivityDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Adding, editing or deleting exercises for a client
 FitBook enables our target user (personal trainers) to add, edit and delete custom exercises for each of their clients.
 The management of these custom exercises is performed using the `fitadd` and `fitdelete` commands.
@@ -372,6 +393,8 @@ The following factors were taken into consideration when selecting a suitable da
 Upon listing out our requirements, we found that Java `HashSet` to be the most suitable one because it implements the Java `Set` interface.
 Apart from this, the `Set` interface exposes the `contains` method to check for duplicates.
 
+<div style="page-break-after: always;"></div>
+
 #### Detecting duplicate exercises
 
 Another point of consideration was with regard to how we should determine whether two exercises belonging to the same client
@@ -395,6 +418,8 @@ The correct format is as follows : `add n/NAME p/PHONE`
 | `add n/NAME`  | _Phone number parameter missing!_ |
 | `add p/PHONE` |     _Name parameter missing!_     |
 |  `add NAME`   |     _Invalid command format!_     |
+
+<div style="page-break-after: always;"></div>
 
 Now lets look at the `delete` command for another example
 
@@ -423,6 +448,8 @@ was trivial.
 **_Activity diagram for specialised error message outputs by AddCommandParser_**
 ![SpecialisedErrorMessages](images/SpecialisedErrorMessagesDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -445,6 +472,8 @@ initial address book state, and the `currentStatePointer` pointing to that singl
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
+<div style="page-break-after: always;"></div>
+
 Step 2. The user executes `delete 5` command to delete the 5th client in the address book. The `delete` command
 calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
 to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
@@ -461,6 +490,8 @@ the `addressBookStateList`.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing
 the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
@@ -497,6 +528,8 @@ as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddress
 Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
+
+<div style="page-break-after: always;"></div>
 
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
 pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
@@ -547,6 +580,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Value proposition**: FitBook will help to keep track of client-specific information such as progress, goals, and preferences all in one place, allowing the user to organize and manage their clients' information efficiently.
 
+<div style="page-break-after: always;"></div>
+
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -570,6 +605,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user who has completed dealings with a client | archive contacts                                                                             | remove them from the contact list but still have their contact information in case I need it |
 | `*`      | user with many clients                        | sort contacts based on next session                                                          | easily locate the details of the client I am going to meet next                              |
 | `*`      | user with many contacts in the address book   | sort contacts by name                                                                        | locate a client easily                                                                       |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -612,6 +649,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Use case ends.
 
 <hr>
+
+<div style="page-break-after: always;"></div>
 
 **System**: FitBook
 
@@ -656,6 +695,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes.
 
 <hr>
+
+<div style="page-break-after: always;"></div>
 
 **Use case**: UC05 - Add or overwrite exercise for a client
 
@@ -742,6 +783,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   <hr>
 
+<div style="page-break-after: always;"></div>
+
 **System**: FitBook
 
 **Use case**: UC08 - Edit a client's details
@@ -778,6 +821,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 4.
 
 <hr>
+
+<div style="page-break-after: always;"></div>
 
 **System**: FitBook
 
@@ -874,6 +919,8 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a client
 
 1. Deleting a client while all clients are being shown
@@ -905,6 +952,8 @@ testers are expected to do more *exploratory* testing.
 
     Expected: FitBook starts with an empty address book. No clients are loaded.
 
+<div style="page-break-after: always;"></div>
+
 ## Parameter Constraints
 
 | Parameter          | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
@@ -923,6 +972,8 @@ testers are expected to do more *exploratory* testing.
 | **Exercise Sets**  | {::nomarkdown}<ul><li> Must be a positive integer. </li> <li> A reasonable maximum value of 1000000 is allowed. </li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | **Exercise Reps**  | {::nomarkdown}<ul><li> Must be a positive integer. </li> <li> A reasonable maximum value of 1000000 is allowed. </li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | **Exercise Break** | {::nomarkdown}<ul><li> Must be a non-negative integer. </li> <li> A reasonable maximum value of 1000000 is allowed. </li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+
+<div style="page-break-after: always;"></div>
 
 ## Appendix: Planned Enhancements
 
@@ -949,6 +1000,9 @@ FitBook's team size is 5.
 
     For advanced users, we can provide a better keyboard navigation experience by making the element being selected with `Tab` clearer. We also plan to remove unnecessary `Tab` presses between elements of interest. e.g. to get from the command input box to the client list requires 2 `Tab`s even though the user cannot interact with the result response box.
 
+<div style="page-break-after: always;"></div>
+
+{:start="5"}
 1. **Adaptive client list entries**
 
     The client list will always show the most important information at a glance. To reduce clutter, each entry of the client list will only show the following fields, each in a single line.
@@ -976,6 +1030,9 @@ FitBook's team size is 5.
 
     For example, the `fitdelete` command currently has the format `fitdelete INDEX n/EXERCISE_NAME`. Removing the requirement of specifying the `n/` prefix will provide greater convenience to the user by requiring them to type less. Furthermore, it will address issues that come with specifying multiple `n/` prefixes.
 
+<div style="page-break-after: always;"></div>
+
+{:start="10"}
 1. **Show an error message on the GUI when JSON file is corrupted**
 
    Currently, FitBook starts with an empty client list when it tries to load a corrupted JSON data file. The user does not get notified in the GUI that the previous data file had been corrupted, and only sees an empty client list in the FitBook GUI.
