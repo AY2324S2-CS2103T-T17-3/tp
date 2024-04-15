@@ -804,27 +804,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <hr>
 
-**System**: FitBook
-
-**Use case**: UC10 - Searching for a weight/height range
-
-**Actor**: User
-
-**MSS**
-
-1. User requests to see a list of all clients with a specified weight/height range.
-1. FitBook displays a success message followed by the list of clients.
-1. Use case ends.
-
-**Extensions**
-
-* 1a. User enters an invalid command.
-    * 1a1. FitBook alerts the user that the command is invalid and displays the correct format.
-    * Use case ends.
-
-<hr>
-
-
 ### Non-Functional Requirements
 
 <a id="nfr-1"></a>
