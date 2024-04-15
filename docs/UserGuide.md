@@ -117,7 +117,7 @@ Java is a versatile programming language used for developing various application
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -255,15 +255,15 @@ Format: `fitadd INDEX [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all
 
 * At least one or more of the default supported prefixes must be supplied.
 
-| Prefix     | Exercises                                                                                                                                             |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Prefix       | Exercises                                                                                                                                                               |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `/arms`      | `bicep curls` - `sets`: 3, `reps`: 10, `break`: 60<br/>`tricep dips` - `sets`: 3, `reps`: 12, `break`: 60<br/>`push-ups` - `sets`: 3, `reps`: 15, `break`: 90           |
 | `/legs`      | `squats` - `sets`: 4, `reps`: 15, `break`: 90<br/>`lunges` - `sets`: 3, `reps`: 12, `break`: 60<br/>`calf raises` - `sets`: 3, `reps`: 20, `break`: 60                  |
 | `/chest`     | `bench press` - `sets`: 4, `reps`: 8, `break`: 120<br/>`push-ups` - `sets`: 3, `reps`: 15, `break`: 90<br/>`chest fly` - `sets`: 3, `reps`: 10, `break`: 90             |
 | `/back`      | `pull-ups` - `sets`: 3, `reps`: 8, `break`: 120<br/>`bent-over rows` - `sets`: 3, `reps`: 10, `break`: 90<br/>`lat pull-downs` - `sets`: 3, `reps`: 12, `break`: 60     |
 | `/shoulders` | `shoulder press` - `sets`: 3, `reps`: 10, `break`: 90<br/>`lateral raises` - `sets`: 3, `reps`: 12, `break`: 60<br/>`front raises` - `sets`: 3, `reps`: 10, `break`: 60 |
 | `/abs`       | `crunches` - `sets`: 3, `reps`: 20, `break`: 60<br/>`plank` - `sets`: 3, `reps`: 60, `break`: 90<br/>`russian twists` - `sets`: 3, `reps`: 15, `break`: 60              |
-| `/all`       | A combination of all exercises from the other prefixes                                                                                                |
+| `/all`       | A combination of all exercises from the other prefixes                                                                                                                  |
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
@@ -411,17 +411,17 @@ Finds all clients that match the specified attributes.
 
 Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/NOTE] [t/TAG]…​`
 
-* The search is case-insensitive for inputs that accept characters (i.e. `NAME, PHONE, EMAIL, ADDRESS, NOTE, TAG`). e.g `hans` will match `Hans`
-* `RANGE` allows the user to search for a value that falls within the specified `RANGE`. Refer to the [parameter constraints](#parameter-constraints) table for more info.
+* The search is case-insensitive for inputs that accept characters (i.e. `NAME, PHONE, EMAIL, ADDRESS, NOTE, TAG`). e.g. `hans` will match `Hans`
+* `RANGE` allows the user to search for a value that falls within the specified `RANGE`. Refer to the [parameter constraints table](#parameter-constraints) for more info.
 * Any fields specified in the format above can be searched.
 * When an empty input is specified for an optional field, only users that have value(s) available for that field will be shown. (e.g. `find w/` returns all clients that have at least one weight value associated with them).
 * Multiple fields can be searched in one command.
-    * All fields must match (e.g `find n/Wendy p/91234567` will match with a client whose name **contains** `wendy` and phone number **contains** `91234567`)
-* All fields except `TAG`, `WEIGHT` AND `HEIGHT` will be matched based on substring (e.g `Wen` will match `Wendy`)
+    * All fields must match (e.g. `find n/Wendy p/91234567` will match with a client whose name **contains** `wendy` and phone number **contains** `91234567`)
+* All fields except `TAG`, `WEIGHT` AND `HEIGHT` will be matched based on substring (e.g. `Wen` will match `Wendy`)
 
 <div markdown="block" class="alert alert-warning">:warning: **Take note:**
 * Unlike other fields, `TAG` must be an exact match (case-insensitive)
-* E.g `find t/fri` will not match the tag `friend`
+* e.g. `find t/fri` will not match the tag `friend`
 * But `find t/fRieNd` will match the tag `friend`
 </div>
 
@@ -455,7 +455,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` - Deletes the second client in the list.
-* `find Betsy` followed by `delete 1`- Deletes the first client in the results of the `find` command (i.e Deletes the first client whose name contains `Betsy`).
+* `find Betsy` followed by `delete 1`- Deletes the first client in the results of the `find` command (i.e. Deletes the first client whose name contains `Betsy`).
 
 <hr>
 
@@ -507,7 +507,7 @@ Furthermore, certain edits can cause FitBook to behave in unexpected ways (e.g. 
 </figure>
 
 
-To save a contact to your mobile phone from FitBook, simply scan the QR code next to the contact using your phone's default camera app!
+To save a client as a contact to your mobile phone from FitBook, simply scan the QR code next to the contact using your phone's default camera app!
 
 <div markdown="block" class="alert alert-warning">:warning:
 Due to the limited availability of mobile devices for testing, this feature has only been tested on the following devices:
@@ -536,7 +536,7 @@ While most modern smartphones are able to scan QR codes with the default camera 
 
 ###### What version of Java do I have?
 
-**A**: Open a command prompt, and run the command `java --version`
+**A**: Open a command prompt, and run the command `java --version`.
 
 ###### Why doesn't FitBook start when I double-click?
 
@@ -544,7 +544,7 @@ While most modern smartphones are able to scan QR codes with the default camera 
 
 1. Open a command prompt (**cmd** for Windows, **Terminal** for Mac)
 
-1. Use `cd` to navigate to the folder containing `FitBook.jar`
+1. Use `cd` to navigate to the folder containing `FitBook.jar`.
     * e.g. `cd ~/Downloads/FitBook/`
 
 1. Run `java -jar FitBook.jar` to launch FitBook.
@@ -613,7 +613,7 @@ FitBook does not allow duplicate clients. Clients are considered duplicates if t
 
 > Examples:
 >
-> 1. Using the `add` command to add a client that already exists in the Fitbook.
-> 1. Using the `edit` command to modify an existing client to have the same name and phone number as another client in Fitbook.
+> 1. Using the `add` command to add a client that already exists in the FitBook.
+> 1. Using the `edit` command to modify an existing client to have the same name and phone number as another client in FitBook.
 >
 > Any command that would result in duplicate clients will result in the error *"This person already exists in the address book"*.

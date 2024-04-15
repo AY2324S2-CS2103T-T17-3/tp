@@ -37,9 +37,9 @@ public class Weight extends Attribute<Float> {
     }
 
     /**
-     * Checks if the weight object has a value of 0
+     * Checks if the weight object has a value of 0.
      *
-     * @return true if the weight object has a value of 0 and false otherwise
+     * @return true if the weight object has a value of 0 and false otherwise.
      */
     public boolean isZero() {
         return getValue() == 0f;
