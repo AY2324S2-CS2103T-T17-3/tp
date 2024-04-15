@@ -335,7 +335,7 @@ Examples:
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
-If `burpees` already exists for the 3 examples above, , please refer to this [warning](#fitadd-overwrite-warning) for the behaviour of the commands.
+If `burpees` already exists for the 3 examples above, please refer to this [warning](#fitadd-overwrite-warning) for the behaviour of the commands.
 </div>
 
 * `fitadd 2 /arms` - Adds a default set of exercises from the `arms` category to the client at index `2`.
