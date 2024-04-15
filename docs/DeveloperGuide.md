@@ -666,8 +666,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to add or overwrite an exercise for a specific client.
-2. FitBook updates the client's exercise information and displays a success message.
-3. Use case ends.
+1. FitBook updates the client's exercise information and displays a success message.
+1. Use case ends.
 
 **Extensions**
 
@@ -698,8 +698,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to delete an exercise from a specific client.
-2. FitBook deletes the specified exercise and displays a success message.
-3. Use case ends.
+1. FitBook deletes the specified exercise and displays a success message.
+1. Use case ends.
 
 **Extensions**
 
