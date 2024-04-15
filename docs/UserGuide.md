@@ -410,7 +410,7 @@ Finds all clients that match the specified attributes.
 Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/NOTE] [t/TAG]…​`
 
 * The search is case-insensitive for inputs that accept characters (i.e. `NAME, PHONE, EMAIL, ADDRESS, NOTE, TAG`). e.g `hans` will match `Hans`
-* `RANGE` allows the user to search for a value that falls within the specified `RANGE`. Refer to the [parameter constraints](#parameter-constraints) for more info.
+* `RANGE` allows the user to search for a value that falls within the specified `RANGE`. Refer to the [parameter constraints](#parameter-constraints) table for more info.
 * Any fields specified in the format above can be searched.
 * When an empty input is specified for an optional field, only users that have value(s) available for that field will be shown. (e.g. `find w/` returns all clients that have at least one weight value associated with them).
 * Multiple fields can be searched in one command.
