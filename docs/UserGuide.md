@@ -534,7 +534,7 @@ While most modern smartphones are able to scan QR codes with the default camera 
 
 ###### What version of Java do I have?
 
-**A**: Open a command prompt, and run the command `java --version`
+**A**: Open a command prompt, and run the command `java --version`.
 
 ###### Why doesn't FitBook start when I double-click?
 
@@ -542,7 +542,7 @@ While most modern smartphones are able to scan QR codes with the default camera 
 
 1. Open a command prompt (**cmd** for Windows, **Terminal** for Mac)
 
-1. Use `cd` to navigate to the folder containing `FitBook.jar`
+1. Use `cd` to navigate to the folder containing `FitBook.jar`.
     * e.g. `cd ~/Downloads/FitBook/`
 
 1. Run `java -jar FitBook.jar` to launch FitBook.
