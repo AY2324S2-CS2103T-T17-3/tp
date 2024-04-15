@@ -678,8 +678,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. User enters an invalid command.
     * 3a1. FitBook alerts the user that the command is invalid and displays the correct format.
     * Use case ends.
-* 3b. User wants to remove a weight value.
-    * 3b1. If there are weight values to be removed, FitBook displays a success message. Else, FitBook displays an error message indicating that there are no weight values to be removed.
+* 3b. User wants to remove the latest weight value.
+    * 3b1. If there is a weight value to be removed, FitBook displays a success message. Else, FitBook displays an error message indicating that there are no more weight value(s) to be removed.
     * Use case ends.
 
 <hr>
