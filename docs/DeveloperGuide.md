@@ -171,7 +171,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the address book data i.e. all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
   is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
@@ -314,11 +314,11 @@ Note that the main searching logic is defined by creating a `Predicate` (`NameCo
 #### Defining new methods of finding clients
 All attributes of a `Person` has been abstracted into an `Attribute` class. This `Attribute` class defines an abstract `isMatch()` method, thus, any attributes of a `Person` (new or existing), would be required to implement the `isMatch()` method to define how the attribute can be searched using the `find` command.
 
-This is what allows the `find` command to be extendable to any attribute of a `Person`. Each attribute can be defined to be searched in different ways. For example, searching a person's `Name` would test a substring against the `Name` attribute, searching a person's `Weight` would test the `Weight` attribute against a range specified (i.e `isMatch()` will return `true` if the person's weight falls within the specified range).
+This is what allows the `find` command to be extendable to any attribute of a `Person`. Each attribute can be defined to be searched in different ways. For example, searching a person's `Name` would test a substring against the `Name` attribute, searching a person's `Weight` would test the `Weight` attribute against a range specified (i.e. `isMatch()` will return `true` if the person's weight falls within the specified range).
 
 Therefore, to define how an attribute is being searched, one would simply take the following steps:
-1. Define the implementation of the `isMatch()` method of the respective attribute. (e.g `Name::isMatch()`)
-1. Create a new class that extends `SearchPredicate` (e.g `NameContainsSubstringPredicate`)
+1. Define the implementation of the `isMatch()` method of the respective attribute. (e.g. `Name::isMatch()`)
+1. Create a new class that extends `SearchPredicate` (e.g. `NameContainsSubstringPredicate`)
 1. Update the `parse()` method in `FindCommandParser` to uses the new predicate
 
 #### Implementation Rationale
@@ -666,8 +666,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to add or overwrite an exercise for a specific client.
-2. FitBook updates the client's exercise information and displays a success message.
-3. Use case ends.
+1. FitBook updates the client's exercise information and displays a success message.
+1. Use case ends.
 
 **Extensions**
 
@@ -689,7 +689,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <hr>
 
-**Use case**: UC06 - Delete Exercise for a Client
+**Use case**: UC06 - Delete exercise for a client
 
 **System**: FitBook
 
@@ -698,8 +698,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to delete an exercise from a specific client.
-2. FitBook deletes the specified exercise and displays a success message.
-3. Use case ends.
+1. FitBook deletes the specified exercise and displays a success message.
+1. Use case ends.
 
 **Extensions**
 
@@ -722,21 +722,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to find clients by filtering based on attributes.
-1. Fitbook displays a success message with the number of clients found, along with the filtered list of clients.
+1. FitBook displays a success message with the number of clients found, along with the filtered list of clients.
 1. Use case ends.
 
 **Extensions**
 * 1a. User does not specify any attribute to filter by.
-  * 1a1. Fitbook alerts the user that the command is invalid and displays the correct command format
+  * 1a1. FitBook alerts the user that the command is invalid and displays the correct command format
   * Step 1a1 is repeated until the user specifies an attribute to filter by.
   * Use case resumes at step 2.
 
-* 1b. User specifies a filter that does not match any clients in Fitbook.
-  * 1b1. Fitbook displays a no client found message and displays an empty list of clients.
+* 1b. User specifies a filter that does not match any clients in FitBook.
+  * 1b1. FitBook displays a no client found message and displays an empty list of clients.
   * Use case ends.
 
 * 1c. User specifies a parameter in an invalid format.
-  * 1c1. Fitbook alerts the user that the parameter format is invalid and displays the correct parameter format.
+  * 1c1. FitBook alerts the user that the parameter format is invalid and displays the correct parameter format.
   * Step 1c1 is repeated until the user specifies a correct parameter format.
   * Use case resumes at step 2.
 
