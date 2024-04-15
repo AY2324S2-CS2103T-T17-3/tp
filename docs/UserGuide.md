@@ -155,7 +155,7 @@ Adds a client to the FitBook.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​`<br>
 
-* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
+* Refer to the [parameter constraints table](#parameter-constraints) for more details about input restrictions.
 * When HEIGHT and/or WEIGHT is specified to be 0, no height/weight will be added to the client.
 * HEIGHT and WEIGHT only take in one value each. For example, the following commands are invalid
   * `add n/Tom p/123 w/85 65`
@@ -191,7 +191,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGH
 * Edits the clients at the specified `INDEX`. The index refers to the index number shown in the displayed client list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
+* Refer to the [parameter constraints table](#parameter-constraints) for more details about input restrictions.
 * When no value is specified after a prefix, the value of that prefix will be removed from the client. (e.g. `edit 1 nt/` removes the note from the client at index 1).
     * Since WEIGHT can store multiple historical values, specifying an empty weight prefix removes the latest weight value from the client. Otherwise, the latest weight value will be replaced by the specified weight in this command.
 * HEIGHT and WEIGHT only take in one value each. For example, the following commands are invalid
@@ -218,7 +218,7 @@ Examples:
 Format: `note INDEX [NOTE] `
 
 * Edits the note of the client specified by `INDEX`. The index refers to the index number shown in the displayed client list.
-* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
+* Refer to the [parameter constraints table](#parameter-constraints) for more details about input restrictions.
 * Existing note will be updated to the note specified.
 * If no note is given, the note for the client at the specified index will be deleted.
 
@@ -245,7 +245,7 @@ Format: `fitadd INDEX n/EXERCISE_NAME [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN
 
 * Adds the specified exercise to the client specified by `INDEX`. The index refers to the index number shown in the displayed client list.
 * `EXERCISE_NAME` is **case-insensitive**.
-* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
+* Refer to the [parameter constraints table](#parameter-constraints) for more details about input restrictions.
 * Overwrites the specified exercise and its values if the exercise already exists for the client.
 * An exercise is deemed to already exist if the case-insensitive user-supplied exercise name completely matches an existing exercise name of the client.
 
@@ -334,6 +334,7 @@ Examples:
   * `Break between sets`: 30 seconds (specified value).
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
+
 If `burpees` already exists for the 3 examples above, , please refer to this [warning](#fitadd-overwrite-warning) for the behaviour of the commands.
 </div>
 
@@ -342,6 +343,7 @@ If `burpees` already exists for the 3 examples above, , please refer to this [wa
 * `fitadd 2 /arms /legs` - Adds a default set of exercises from the `arms` and `legs` category to the client at index `2`.
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
+
 If any of the exercises within the `arms` or `legs` category already exists for the above 2 commands, please refer to this [warning](#fitadd-prefix-warning) for the behaviour of this command.
 </div>
 
@@ -354,7 +356,7 @@ Format: `fitdelete INDEX n/EXERCISE_NAME`
 
 * Deletes the specified exercise from the client specified by `INDEX`. The index refers to the index number shown in the displayed client list.
 * `EXERCISE_NAME` is **case-insensitive**.
-* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
+* Refer to the [parameter constraints table](#parameter-constraints) for more details about input restrictions.
 
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
@@ -388,7 +390,7 @@ Examples:
 Format: `weight INDEX [WEIGHT] `
 
 * Adds a weight value (kg) to a client specified by `INDEX`. The index refers to the index number shown in the displayed client list.
-* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
+* Refer to the [parameter constraints table](#parameter-constraints) for more details about input restrictions.
 * Weight values specified in this command will be added as a new weight value to the specified client. To edit the latest weight of the client, use the [`edit`](#editing-a-client--edit) command.
 * If more than one value is entered, only the first value will be parsed. Extraneous parameters after the first value will be ignored.
   * For example, `weight 1 85 95` only adds the weight value of `85` to the first client in the list. The value of `95` will be ignored.
@@ -447,7 +449,7 @@ Deletes the specified client from FitBook.
 Format: `delete INDEX`
 
 * Deletes the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list.
-* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
+* Refer to the [parameter constraints table](#parameter-constraints) for more details about input restrictions.
 * Anything after `delete` is treated as the index.
 * The index cannot be followed by any text (`delete 1 2` will be regarded as an invalid index).
 
