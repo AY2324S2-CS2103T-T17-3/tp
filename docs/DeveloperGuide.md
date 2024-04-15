@@ -651,8 +651,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. User enters an invalid command.
-    * 2a1. FitBook alerts the user that the command is invalid and displays the correct format.
+* 1a. User enters an invalid command.
+    * 1a1. FitBook alerts the user that the command is invalid and displays the correct format.
     * Use case resumes.
 
 <hr>
@@ -771,7 +771,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. FitBook alerts the user that the command format is invalid and displays the correct format.
     * Step 3b1 is repeated until the user enters a valid command.
     * Use case resumes at step 4.
-  
+
 * 3c. User tries to edit a client's name and phone number which ends up matching another client that already exists in FitBook.
     * 3c1. FitBook alerts the user that a client with that name and details already exists.
     * Step 3c1 is repeated until the user specifies a valid edit that will not result in a duplicate client.
