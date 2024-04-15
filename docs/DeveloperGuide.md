@@ -999,6 +999,6 @@ FitBook's team size is 5.
 
 1. **Show an error message on the GUI when JSON file is corrupted**
 
-   Currently, FitBook starts with an empty JSON file when a corrupted JSON file is being loaded upon startup. The user does not get notified on the GUI that the previous JSON file is corrupted, and only sees an empty client list on the FitBook GUI.
+   Currently, FitBook starts with an empty client list when it tries to load a corrupted JSON data file. The user does not get notified in the GUI that the previous data file had been corrupted, and only sees an empty client list in the FitBook GUI.
 
    We plan to show an error message to the user in the GUI when FitBook detects a corrupted data file, and inform the user that FitBook will start with an empty client list instead.
