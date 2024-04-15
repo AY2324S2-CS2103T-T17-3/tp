@@ -24,6 +24,8 @@ The purpose of this user guide is to **walk you through installing FitBook**, as
 
 You can use the [Table of contents](#table-of-contents) to navigate directly to what you're looking for.
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-info">:bulb: **Tips/Info**
 
 Be on the lookout for boxes like these, they usually contain important information and helpful tips!
@@ -85,7 +87,7 @@ Java is a versatile programming language used for developing various application
 1. A GUI similar to the one depicted below should appear in a few seconds. The app contains some sample data for you to familiarize yourself with the UI.
 
     <figure style="text-align: center;">
-        <img src="images/UGUI.png">
+        <img src="images/UGUI.png" height="400" width="auto" style="margin: auto">
         <figcaption><i>FitBook Graphical User Interface</i></figcaption>
     </figure>
 
@@ -224,6 +226,8 @@ Format: `note INDEX [NOTE] `
 
 > While this can also be done using the `edit` command, this `note` command serves as a faster way for users to directly modify a note.
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 
 * `note 1 History of asthma` - Changes the note of the 1st client to `History of asthma`.
@@ -253,6 +257,8 @@ Alternatively, you can use **one or more** of the supported prefixes to quickly 
 
 Format: `fitadd INDEX [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all]`
 
+<div style="page-break-after: always;"></div>
+
 * At least one or more of the default supported prefixes must be supplied.
 
 | Prefix       | Exercises                                                                                                                                                               |
@@ -269,6 +275,8 @@ Format: `fitadd INDEX [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all
 
 You must either specify an exercise name, or use one or more of the default supported prefixes, but not both together.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 <a id="fitadd-overwrite-warning"></a>
@@ -296,6 +304,8 @@ exercise value(s). Exercise values that are not specified will remain unchanged.
 >   * `Break between sets` updated to `60 seconds`.
 > ![fitadd-overwrite-reps-break](images/FitaddOverwriteRepsBreak.png)
 </div>
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 <a id="fitadd-prefix-warning"></a>
@@ -328,6 +338,8 @@ Examples:
   * `Reps`: 5 (specified value).
   * `Break between sets`: 0 seconds (default value).
 
+<div style="page-break-after: always;"></div>
+
 * `fitadd 1 n/burpees s/3 r/5 b/30` - Adds `burpees` exercise to the client at index `1` with the following values:
   * `Sets`: 3 (specified value).
   * `Reps`: 5 (specified value).
@@ -358,6 +370,7 @@ Format: `fitdelete INDEX n/EXERCISE_NAME`
 * `EXERCISE_NAME` is **case-insensitive**.
 * Refer to the [parameter constraints table](#parameter-constraints) for more details about input restrictions.
 
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
@@ -425,6 +438,8 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/N
 * But `find t/fRieNd` will match the tag `friend`
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-info">:bulb: **Tip:**
 
 * If no prefix is specified for the first argument, it will be used to search for a client's name.
@@ -458,6 +473,8 @@ Examples:
 * `find Betsy` followed by `delete 1`- Deletes the first client in the results of the `find` command (i.e. Deletes the first client whose name contains `Betsy`).
 
 <hr>
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 
@@ -502,7 +519,7 @@ Furthermore, certain edits can cause FitBook to behave in unexpected ways (e.g. 
 ### Save contact to phone
 
 <figure style="text-align: center;">
-    <img src="images/QrCodeContactCard.png">
+    <img src="images/QrCodeContactCard.png" style="margin: auto">
     <figcaption><i>QR Code Contact Card</i></figcaption>
 </figure>
 
@@ -538,6 +555,8 @@ While most modern smartphones are able to scan QR codes with the default camera 
 
 **A**: Open a command prompt, and run the command `java --version`.
 
+<div style="page-break-after: always;"></div>
+
 ###### Why doesn't FitBook start when I double-click?
 
 **A**: If double-clicking to open FitBook doesn't work, try running it via the command line:
@@ -569,6 +588,8 @@ While most modern smartphones are able to scan QR codes with the default camera 
 
 <hr>
 
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 
 | Command                                                           | Format, Examples                                                                                                                                                                                                                       |
@@ -585,6 +606,8 @@ While most modern smartphones are able to scan QR codes with the default camera 
 | [**help**](#viewing-help--help)                                   | `help`                                                                                                                                                                                                                                 |
 | [**note**](#adding-a-note-to-a-client--note)                      | `note INDEX [NOTE]` <br><br> Example: <br>{::nomarkdown}<li>{:/} `note 2 Sprained right ankle in the past`{::nomarkdown}</li>{:/} <br><br>`note INDEX /edit`<br><br>Example: <br> {::nomarkdown}<li>{:/}`note 1 /edit`{::nomarkdown}</li>{:/}                                                                                                                                    |
 | [**weight**](#adding-or-removing-weight-of-a-client--weight)      | `weight INDEX [WEIGHT]`<br><br> Example: <br> {::nomarkdown}<li>{:/} `weight 3 70`{::nomarkdown}</li>{:/}                                                                                                                                                                                   |
+
+<div style="page-break-after: always;"></div>
 
 ## Parameter Constraints
 
@@ -604,6 +627,8 @@ While most modern smartphones are able to scan QR codes with the default camera 
 | **Exercise Sets**  | {::nomarkdown}<ul><li> Must be a positive integer. </li> <li> A reasonable maximum value of 1000000 is allowed. </li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | **Exercise Reps**  | {::nomarkdown}<ul><li> Must be a positive integer. </li> <li> A reasonable maximum value of 1000000 is allowed. </li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | **Exercise Break** | {::nomarkdown}<ul><li> Must be a non-negative integer. </li> <li> A reasonable maximum value of 1000000 is allowed. </li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+
+<div style="page-break-after: always;"></div>
 
 ### Duplicate Clients
 
