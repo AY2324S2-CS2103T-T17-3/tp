@@ -160,7 +160,7 @@ How the parsing works:
   the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as
   a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
-  interface so that they can be treated similarly where possible e.g., during testing.
+  interface so that they can be treated similarly where possible e.g. during testing.
 
 ### Model component
 
@@ -865,14 +865,15 @@ testers are expected to do more *exploratory* testing.
     1. Download the jar file and copy into an empty folder
 
     1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
-       optimum.
+       optimal.
 
 1. Saving window preferences
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimal size. Move the window to a different location. Close the window.
 
     1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   
+   Expected: The most recent window size and location is retained.
 
 ### Deleting a client
 
