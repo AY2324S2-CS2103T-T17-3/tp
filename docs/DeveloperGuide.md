@@ -731,12 +731,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * Step 1a1 is repeated until the user specifies an attribute to filter by.
   * Use case resumes at step 2.
 
-* 1b. User specifies a filter that does not match any clients in Fitbook.
-  * 1b1. Fitbook displays a no client found message and displays an empty list of clients.
+* 1b. User specifies a filter that does not match any clients in FitBook.
+  * 1b1. FitBook displays a no client found message and displays an empty list of clients.
   * Use case ends.
 
 * 1c. User specifies a parameter in an invalid format.
-  * 1c1. Fitbook alerts the user that the parameter format is invalid and displays the correct parameter format.
+  * 1c1. FitBook alerts the user that the parameter format is invalid and displays the correct parameter format.
   * Step 1c1 is repeated until the user specifies a correct parameter format.
   * Use case resumes at step 2.
 
